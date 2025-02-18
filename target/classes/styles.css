@@ -31,6 +31,19 @@
     -fx-background-color: #0056b3;
 }
 
+/* Stili per il titolo */
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+/* Stili per il sottotitolo */
+.subtitle {
+    -fx-font-size: 18px;
+    -fx-text-fill: #666;
+}
+
 /* Stili per i campi di testo */
 .text-field, .password-field {
     -fx-padding: 10px;

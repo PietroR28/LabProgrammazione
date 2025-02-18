@@ -2,13 +2,20 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="play.controller.HomeController"
-      alignment="CENTER" spacing="10" stylesheets="@../styles.css" styleClass="vbox">
+      alignment="CENTER" spacing="20" stylesheets="@../styles.css" styleClass="vbox">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
+    
+    <Label fx:id="welcomeLabel" styleClass="title"/>
+    <Label text="Scegli una categoria di esercizi:" styleClass="subtitle"/>
+    
     <Button text="Esercizio 1" onAction="#handleExercise1" styleClass="button"/>
     <Button text="Esercizio 2" onAction="#handleExercise2" styleClass="button"/>
+    <Button text="Esercizio 3" onAction="#handleExercise3" styleClass="button"/>
+    <Button text="Esercizio 4" onAction="#handleExercise4" styleClass="button"/>
 </VBox>
