@@ -5,17 +5,41 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.GridPane?>
 
-<GridPane xmlns:fx="http://javafx.com/fxml"
-          fx:controller="play.controller.LoginController"
-          alignment="CENTER" hgap="10" vgap="10">
-    <padding>
-        <Insets top="20" bottom="20" left="20" right="20"/>
-    </padding>
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="play.controller.LoginController"
+           alignment="CENTER">
 
-    <TextField fx:id="usernameField" promptText="Username" GridPane.rowIndex="0"/>
-    <PasswordField fx:id="passwordField" promptText="Password" GridPane.rowIndex="1"/>
-    <Button text="Login" onAction="#handleLogin" GridPane.rowIndex="2"/>
-    <Label fx:id="statusLabel" GridPane.rowIndex="3"/>
-</GridPane>
+    <!-- Contenitore principale (StackPane) -->
+    <GridPane fx:id="loginForm" alignment="CENTER" hgap="10" vgap="10" visible="true">
+        <padding>
+            <Insets top="20" bottom="20" left="20" right="20"/>
+        </padding>
+
+        <!-- Form di login -->
+        <TextField fx:id="usernameField" promptText="Username" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+        <PasswordField fx:id="passwordField" promptText="Password" GridPane.rowIndex="1" GridPane.columnSpan="2"/>
+        <Button text="Login" onAction="#handleLogin" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <Button text="Crea nuovo utente" onAction="#handleCreateUser" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <!-- Form di creazione nuovo utente (nascosto inizialmente) -->
+    <GridPane fx:id="createUserForm" alignment="CENTER" hgap="10" vgap="10" visible="false">
+        <padding>
+            <Insets top="20" bottom="20" left="20" right="20"/>
+        </padding>
+
+        <TextField fx:id="firstNameField" promptText="Nome" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+        <TextField fx:id="lastNameField" promptText="Cognome" GridPane.rowIndex="1" GridPane.columnSpan="2"/>
+        <TextField fx:id="newUsernameField" promptText="Username" GridPane.rowIndex="2" GridPane.columnSpan="2"/>
+        <PasswordField fx:id="newPasswordField" promptText="Password" GridPane.rowIndex="3" GridPane.columnSpan="2"/>
+        <Button text="Salva" onAction="#handleSaveUser" GridPane.rowIndex="4"/>
+        <Button text="Annulla" onAction="#handleCancelCreateUser" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <!-- Etichetta per lo stato -->
+    <Label fx:id="statusLabel" GridPane.rowIndex="5" GridPane.columnSpan="2"/>
+
+</StackPane>

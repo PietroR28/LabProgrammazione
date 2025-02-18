@@ -11,8 +11,8 @@ public class Play extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
-        primaryStage.setTitle("Play - MVC Demo");
-        primaryStage.setScene(new Scene(root, 400, 300));
+        primaryStage.setTitle("PLAY");
+        primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
     }
 

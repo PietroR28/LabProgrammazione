@@ -5,13 +5,20 @@ import java.util.Map;
 
 public class UserDataManager {
 
-    private static final Map<String, String> fakeUsers = new HashMap<>();
-    static {
-        fakeUsers.put("admin", "1234");
-        fakeUsers.put("user", "pass");
-    }
+    private static Map<String, String> users = new HashMap<>(); // Usa una mappa per immagazzinare nome utente e password
 
     public static boolean checkUser(String username, String password) {
-        return fakeUsers.containsKey(username) && fakeUsers.get(username).equals(password);
+        return users.containsKey(username) && users.get(username).equals(password);
+    }
+
+    public static boolean saveNewUser(String firstName, String lastName, String username, String password) {
+        // Verifica che l'username non sia già presente
+        if (users.containsKey(username)) {
+            return false;
+        }
+
+        // Salva il nuovo utente
+        users.put(username, password);
+        return true;
     }
 }
