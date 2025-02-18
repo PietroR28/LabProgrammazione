@@ -1,10 +1,15 @@
 package play.controller;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import play.model.UserDataManager;
 
 public class LoginController {
@@ -35,10 +40,18 @@ public class LoginController {
         String user = usernameField.getText();
         String pass = passwordField.getText();
         if (UserDataManager.checkUser(user, pass)) {
-            statusLabel.setText("Login Success!");
-            // Passa alla HomeScreen o gestisci la navigazione
+            try {
+                Stage stage = (Stage) usernameField.getScene().getWindow();
+                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/Home.fxml")));
+                stage.setScene(scene);
+                stage.setTitle("Home - Play Esercizi");
+                } catch (IOException e) {
+                e.printStackTrace();
+                statusLabel.setText("Errore nel caricamento della schermata iniziale.");
+            }
         } else {
             statusLabel.setText("Credenziali errate.");
+            statusLabel.setStyle("-fx-text-fill: red;");
         }
     }
 
