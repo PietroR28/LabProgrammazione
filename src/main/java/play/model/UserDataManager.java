@@ -7,6 +7,11 @@ public class UserDataManager {
 
     private static Map<String, String> users = new HashMap<>(); // Usa una mappa per immagazzinare nome utente e password
 
+    static {
+        // Aggiungi un utente di test
+        users.put("user", "pass");
+    }
+
     public static boolean checkUser(String username, String password) {
         return users.containsKey(username) && users.get(username).equals(password);
     }

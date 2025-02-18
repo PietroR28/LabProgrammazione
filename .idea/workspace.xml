@@ -4,15 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9750d18a-27b6-4a31-bca9-5ab70ada1d9e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/play/Play.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/play/Play.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/play/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/play/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/play/model/UserDataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/play/model/UserDataManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/Login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/play/Play.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/Play.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/play/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/controller/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/play/model/UserDataManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/model/UserDataManager.class" afterDir="false" />
+    <list default="true" id="9750d18a-27b6-4a31-bca9-5ab70ada1d9e" name="Changes" comment="Modificati MVC riguardanti Login e Registrazione">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
@@ -114,11 +107,43 @@
       <updated>1739872690285</updated>
       <workItem from="1739872691547" duration="3109000" />
       <workItem from="1739876043507" duration="1749000" />
-      <workItem from="1739877936823" duration="4394000" />
+      <workItem from="1739877936823" duration="4853000" />
     </task>
+    <task id="LOCAL-00001" summary="Modificati MVC riguardanti Login e Registrazione">
+      <option name="closed" value="true" />
+      <created>1739882440277</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1739882440277</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Modificati MVC riguardanti Login e Registrazione">
+      <option name="closed" value="true" />
+      <created>1739882539167</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1739882539167</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Modificati MVC riguardanti Login e Registrazione" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modificati MVC riguardanti Login e Registrazione" />
   </component>
 </project>
