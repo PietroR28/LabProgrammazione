@@ -1,0 +1,128 @@
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><project xmlns=\"http://maven.apache.org/POM/4.0.0\"\r\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n    <modelVersion>4.0.0</modelVersion>\r\n    <groupId>play</groupId>\r\n    <artifactId>Play</artifactId>\r\n    <version>1.0-SNAPSHOT</version>\r\n    <packaging>jar</packaging>\r\n    \r\n    <properties>\r\n        <maven.compiler.source>1.8</maven.compiler.source>\r\n        <maven.compiler.target>1.8</maven.compiler.target>\r\n    </properties>\r\n\r\n    <dependencies>\r\n        <dependency>\r\n            <groupId>org.openjfx</groupId>\r\n            <artifactId>javafx-controls</artifactId>\r\n            <version>17</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.openjfx</groupId>\r\n            <artifactId>javafx-fxml</artifactId>\r\n            <version>17</version>\r\n        </dependency>\r\n    </dependencies>\r\n\r\n    <build>\r\n        <plugins>\r\n            <plugin>\r\n                <groupId>org.openjfx</groupId>\r\n                <artifactId>javafx-maven-plugin</artifactId>\r\n                <version>0.0.8</version>\r\n                <configuration>\r\n                    <mainClass>play.App</mainClass>\r\n                </configuration>\r\n                <executions>\r\n                    <execution>\r\n                        <goals>\r\n                            <goal>run</goal>\r\n                        </goals>\r\n                    </execution>\r\n                </executions>\r\n            </plugin>\r\n        </plugins>\r\n    </build>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pom.xml b/pom.xml
+--- a/pom.xml	(revision 56755405a221b2af7026f3dce3cfdc817b8b4286)
++++ b/pom.xml	(date 1739877636664)
+@@ -6,7 +6,13 @@
+     <artifactId>Play</artifactId>
+     <version>1.0-SNAPSHOT</version>
+     <packaging>jar</packaging>
+-    
++    <repositories>
++        <repository>
++            <id>central</id>
++            <url>https://repo.maven.apache.org/maven2</url>
++        </repository>
++    </repositories>
++
+     <properties>
+         <maven.compiler.source>1.8</maven.compiler.source>
+         <maven.compiler.target>1.8</maven.compiler.target>
+@@ -31,9 +37,6 @@
+                 <groupId>org.openjfx</groupId>
+                 <artifactId>javafx-maven-plugin</artifactId>
+                 <version>0.0.8</version>
+-                <configuration>
+-                    <mainClass>play.App</mainClass>
+-                </configuration>
+                 <executions>
+                     <execution>
+                         <goals>
+@@ -41,7 +44,11 @@
+                         </goals>
+                     </execution>
+                 </executions>
++                <configuration>
++                    <mainClass>com</mainClass>
++                </configuration>
+             </plugin>
+         </plugins>
+     </build>
++
+ </project>
+\ No newline at end of file
+Index: .idea/LabProgrammazione.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/LabProgrammazione.iml b/.idea/LabProgrammazione.iml
+new file mode 100644
+--- /dev/null	(date 1739875091060)
++++ b/.idea/LabProgrammazione.iml	(date 1739875091060)
+@@ -0,0 +1,9 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="JAVA_MODULE" version="4">
++  <component name="NewModuleRootManager" inherit-compiler-output="true">
++    <exclude-output />
++    <content url="file://$MODULE_DIR$" />
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+new file mode 100644
+--- /dev/null	(date 1739876412069)
++++ b/.idea/misc.xml	(date 1739876412069)
+@@ -0,0 +1,14 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ExternalStorageConfigurationManager" enabled="true" />
++  <component name="MavenProjectsManager">
++    <option name="originalFiles">
++      <list>
++        <option value="$PROJECT_DIR$/pom.xml" />
++      </list>
++    </option>
++  </component>
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_23" project-jdk-name="21" project-jdk-type="JavaSDK">
++    <output url="file://$PROJECT_DIR$/out" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1739875091092)
++++ b/.idea/vcs.xml	(date 1739875091092)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644
+--- /dev/null	(date 1739875091092)
++++ b/.idea/.gitignore	(date 1739875091092)
+@@ -0,0 +1,8 @@
++# Default ignored files
++/shelf/
++/workspace.xml
++# Editor-based HTTP Client requests
++/httpRequests/
++# Datasource local storage ignored files
++/dataSources/
++/dataSources.local.xml

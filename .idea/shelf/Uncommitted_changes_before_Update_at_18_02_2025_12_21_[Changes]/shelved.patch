@@ -1,0 +1,19 @@
+Index: target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>C:\\Users\\pietr\\Documents\\LabProgrammazione\\LabProgrammazione\\src\\main\\java\\play\\controller\\LoginController.java\r\nC:\\Users\\pietr\\Documents\\LabProgrammazione\\LabProgrammazione\\src\\main\\java\\play\\model\\ProgressManager.java\r\nC:\\Users\\pietr\\Documents\\LabProgrammazione\\LabProgrammazione\\src\\main\\java\\play\\model\\UserDataManager.java\r\nC:\\Users\\pietr\\Documents\\LabProgrammazione\\LabProgrammazione\\src\\main\\java\\play\\Play.java\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst b/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+--- a/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst	(revision 56755405a221b2af7026f3dce3cfdc817b8b4286)
++++ b/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst	(date 1739877148609)
+@@ -1,4 +1,4 @@
+-C:\Users\pietr\Documents\LabProgrammazione\LabProgrammazione\src\main\java\play\controller\LoginController.java
+-C:\Users\pietr\Documents\LabProgrammazione\LabProgrammazione\src\main\java\play\model\ProgressManager.java
+-C:\Users\pietr\Documents\LabProgrammazione\LabProgrammazione\src\main\java\play\model\UserDataManager.java
+-C:\Users\pietr\Documents\LabProgrammazione\LabProgrammazione\src\main\java\play\Play.java
++C:\Users\ventu\IdeaProjects\LabProgrammazione\src\main\java\play\controller\LoginController.java
++C:\Users\ventu\IdeaProjects\LabProgrammazione\src\main\java\play\model\ProgressManager.java
++C:\Users\ventu\IdeaProjects\LabProgrammazione\src\main\java\play\model\UserDataManager.java
++C:\Users\ventu\IdeaProjects\LabProgrammazione\src\main\java\play\Play.java
