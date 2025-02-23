@@ -1,0 +1,50 @@
+package play.controller;
+
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
+import play.model.Exercise;
+
+public class ExerciseController {
+    @FXML private Label exerciseTitle;
+    @FXML private Label exerciseDescription;
+    @FXML private TextArea codeArea;
+    @FXML private Label resultLabel;
+    
+    private Exercise currentExercise;
+
+    public void initExercise(Exercise exercise) {
+        this.currentExercise = exercise;
+        exerciseTitle.setText(exercise.getTitle());
+        exerciseDescription.setText(exercise.getDescription());
+        codeArea.setText(exercise.getStarterCode());
+    }
+
+    @FXML
+    public void handleVerify() {
+        // Qui implementerai la logica di verifica del codice
+        String code = codeArea.getText();
+        // TODO: Implementare la verifica del codice
+        resultLabel.setText("Verifica in corso...");
+    }
+
+    @FXML
+    public void handleReset() {
+        codeArea.setText(currentExercise.getStarterCode());
+        resultLabel.setText("");
+    }
+
+    @FXML
+    public void handleBack() {
+        try {
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/Home.fxml")));
+            Stage stage = (Stage) codeArea.getScene().getWindow();
+            stage.setScene(scene);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}

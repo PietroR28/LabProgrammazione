@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="play.controller.ExerciseController"
+      alignment="CENTER" spacing="20" stylesheets="@../styles.css" styleClass="vbox">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label fx:id="exerciseTitle" styleClass="title"/>
+    <Label fx:id="exerciseDescription" styleClass="exercise-description" wrapText="true"/>
+    
+    <TextArea fx:id="codeArea" prefRowCount="10" prefColumnCount="50" styleClass="code-area"/>
+    
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Verifica" onAction="#handleVerify" styleClass="button"/>
+        <Button text="Reset" onAction="#handleReset" styleClass="button"/>
+        <Button text="Torna alla Home" onAction="#handleBack" styleClass="button"/>
+    </HBox>
+    
+    <Label fx:id="resultLabel" styleClass="result-label"/>
+</VBox>
