@@ -45,7 +45,7 @@ public class HomeController {
     @FXML
     public void handleExercise1() {
         Exercise exercise = new Exercise(
-            "Esercizio 1 - Calcolo Media",
+            "Esercizio 1 - Trova l'errore",
             "Scrivi una funzione che calcoli la media di un array di numeri.",
             "public class Solution {\n    public static double calcolaMedia(int[] numeri) {\n        // Scrivi qui il tuo codice\n    }\n}"
         );
@@ -68,9 +68,4 @@ public class HomeController {
         System.out.println("Esercizio 3 selezionato");
     }
 
-    @FXML
-    public void handleExercise4() {
-        // Logica per gestire l'esercizio 4
-        System.out.println("Esercizio 4 selezionato");
-    }
 }
