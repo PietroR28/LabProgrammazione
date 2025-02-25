@@ -14,7 +14,7 @@
     <Label fx:id="welcomeLabel" styleClass="title"/>
     <Label text="Scegli una categoria di esercizi:" styleClass="subtitle"/>
     
-    <Button text="Esercizio 1" onAction="#handleExercise1" styleClass="button"/>
-    <Button text="Esercizio 2" onAction="#handleExercise2" styleClass="button"/>
-    <Button text="Esercizio 3" onAction="#handleExercise3" styleClass="button"/>
+    <Button text="Trova l'errore" onAction="#handleExercise1" styleClass="button"/>
+    <Button text="Ordina il codice" onAction="#handleExercise2" styleClass="button"/>
+    <Button text="Completa il codice" onAction="#handleExercise3" styleClass="button"/>
 </VBox>

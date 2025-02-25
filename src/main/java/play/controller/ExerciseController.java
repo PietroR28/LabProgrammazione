@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import play.model.Exercise;
+import play.model.MacroExercise;
 
 public class ExerciseController {
     @FXML private Label exerciseTitle;
@@ -14,9 +14,9 @@ public class ExerciseController {
     @FXML private TextArea codeArea;
     @FXML private Label resultLabel;
     
-    private Exercise currentExercise;
+    private MacroExercise currentExercise;
 
-    public void initExercise(Exercise exercise) {
+    public void initExercise(MacroExercise exercise) {
         this.currentExercise = exercise;
         exerciseTitle.setText(exercise.getTitle());
         exerciseDescription.setText(exercise.getDescription());

@@ -1,11 +1,11 @@
 package play.model;
 
-public class Exercise {
+public abstract class MacroExercise {
     private String title;
     private String description;
     private String starterCode;
 
-    public Exercise(String title, String description, String starterCode) {
+    public MacroExercise(String title, String description, String starterCode) {
         this.title = title;
         this.description = description;
         this.starterCode = starterCode;
