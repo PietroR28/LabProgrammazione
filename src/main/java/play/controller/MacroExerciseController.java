@@ -4,15 +4,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import play.model.MacroExercise;
 
 public class MacroExerciseController {
     @FXML private Label exerciseTitle;
     @FXML private Label exerciseDescription;
-    @FXML private TextArea codeArea;
-    @FXML private Label resultLabel;
+    @FXML private TextFlow exerciseExample;
     
     private MacroExercise currentExercise;
 
@@ -20,21 +20,30 @@ public class MacroExerciseController {
         this.currentExercise = exercise;
         exerciseTitle.setText(exercise.getTitle());
         exerciseDescription.setText(exercise.getDescription());
-        codeArea.setText(exercise.getStarterCode());
+        
+        // Clear existing children
+        exerciseExample.getChildren().clear();
+        
+        // Add formatted text using Text and Label
+        String exampleText = exercise.getExample();
+        String[] parts = exampleText.split("<span style='color:red; text-decoration: underline;'>|</span>");
+        
+        for (int i = 0; i < parts.length; i++) {
+            if (i % 2 == 0) {
+                // Normal text
+                exerciseExample.getChildren().add(new Text(parts[i]));
+            } else {
+                // Formatted text
+                Label redUnderlineText = new Label(parts[i]);
+                redUnderlineText.setStyle("-fx-text-fill: red; -fx-underline: true;");
+                exerciseExample.getChildren().add(redUnderlineText);
+            }
+        }
     }
 
     @FXML
-    public void handleVerify() {
-        // Qui implementerai la logica di verifica del codice
-        String code = codeArea.getText();
-        // TODO: Implementare la verifica del codice
-        resultLabel.setText("Verifica in corso...");
-    }
-
-    @FXML
-    public void handleReset() {
-        codeArea.setText(currentExercise.getStarterCode());
-        resultLabel.setText("");
+    public void handleExerciseRedirect() {
+        // TODO: Implementare il redirect alla pagina dell'esercizio
     }
 
     @FXML
@@ -45,9 +54,9 @@ public class MacroExerciseController {
     
             HomeController homeController = loader.getController();
             String username = currentExercise.getUsername();
-            homeController.setWelcomeMessage(username); // Passa il nome dell'utente
+            homeController.setWelcomeMessage(username);
     
-            Stage stage = (Stage) codeArea.getScene().getWindow();
+            Stage stage = (Stage) exerciseExample.getScene().getWindow();
             stage.setScene(scene);
         } catch (Exception e) {
             e.printStackTrace();

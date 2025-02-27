@@ -48,7 +48,15 @@ public class HomeController {
         MacroExercise exercise = new TrovaErroreExercise(
             "Esercizio 1 - Trova l'errore",
             "Trova l'errore nel seguente codice",
-            "DA MODIFICARE",
+            "public class Main {\n" +
+            "  public static void main(String[] args) {\n" +
+            "    System.out.<span style='color:red; text-decoration: underline;'>printtext</span>(\"Hello World\");\n" +
+            "  }\n" +
+            "}\n\n" +
+            "Invece che <span style='color:red; text-decoration: underline;'>printtext</span> ci va:\n" +
+            "a) printline\n" +
+            "b) println\n" +
+            "c) echo()",
             username
         );
         loadExercise(exercise);

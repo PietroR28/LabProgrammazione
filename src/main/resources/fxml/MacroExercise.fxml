@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.TextFlow?>
 
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="play.controller.MacroExerciseController"
       alignment="CENTER" spacing="20" stylesheets="@../styles.css" styleClass="vbox">
@@ -12,12 +13,10 @@
 
     <Label fx:id="exerciseTitle" styleClass="title"/>
     <Label fx:id="exerciseDescription" styleClass="exercise-description" wrapText="true"/>
-    
-    <TextArea fx:id="codeArea" prefRowCount="10" prefColumnCount="50" styleClass="code-area"/>
+    <TextFlow fx:id="exerciseExample" styleClass="code-area" style="-fx-background-color: white;"/>
     
     <HBox spacing="10" alignment="CENTER">
-        <Button text="Verifica" onAction="#handleVerify" styleClass="button"/>
-        <Button text="Reset" onAction="#handleReset" styleClass="button"/>
+        <Button text="Vai all'esercizio" onAction="#handleExerciseRedirect" styleClass="button"/>
         <Button text="Torna alla Home" onAction="#handleBack" styleClass="button"/>
     </HBox>
     
