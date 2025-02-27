@@ -40,6 +40,6 @@
     </GridPane>
 
     <!-- Etichetta per lo stato -->
-    <Label fx:id="statusLabel" GridPane.rowIndex="5" GridPane.columnSpan="2"/>
+    <Label fx:id="statusLabel" alignment="CENTER" visible="false" style="-fx-background-color: lightgray; -fx-padding: 10px; -fx-border-radius: 5px; -fx-background-radius: 5px;"/>
 
 </StackPane>

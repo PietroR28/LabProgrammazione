@@ -1,30 +1,35 @@
 package play.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import play.model.CompletaCodiceExercise;
 import play.model.MacroExercise;
 import play.model.OrdinaCodiceExercise;
 import play.model.TrovaErroreExercise;
+import play.model.User;
 
 public class HomeController {
     @FXML private Label welcomeLabel;
 
-    @FXML
-    private Button exercise1Button;
+    private static Map<String, User> users = new HashMap<>();
 
     @FXML
-    private Button exercise2Button;
+    public void initialize() {
+    }
 
-    @FXML
-    private Button exercise3Button;
+    public static String getFirstName(String username) {
+        User user = users.get(username);
+        return user != null ? user.getFirstName() : null;
+    }
 
-    public void setWelcomeMessage(String username) {
-        welcomeLabel.setText("Ciao, " + username + "!");
+    public void setWelcomeMessage(String firstName) {
+        welcomeLabel.setText("Ciao " + firstName + "!");
     }
 
     private void loadExercise(MacroExercise exercise) {

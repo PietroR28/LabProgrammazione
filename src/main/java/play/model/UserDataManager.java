@@ -59,4 +59,9 @@ public class UserDataManager {
             e.printStackTrace();
         }
     }
+
+    public static String getFirstName(String username) {
+        User user = users.get(username);
+        return user != null ? user.getFirstName() : null;
+    }
 }
