@@ -47,10 +47,10 @@ public class LoginController {
                 Stage stage = (Stage) usernameField.getScene().getWindow();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Home.fxml"));
                 Scene scene = new Scene(loader.load());
-        
+                
                 HomeController homeController = loader.getController();
-                homeController.setWelcomeMessage(UserDataManager.getFirstName(user));
-        
+                homeController.setWelcomeMessage(UserDataManager.getUsername(user));
+    
                 stage.setScene(scene);
                 stage.setTitle("Home - Play Esercizi");
             } catch (IOException e) {

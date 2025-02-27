@@ -23,15 +23,10 @@ public class HomeController {
     public void initialize() {
     }
 
-    public static String getFirstName(String username) {
-        User user = users.get(username);
-        return user != null ? user.getFirstName() : null;
+    public void setWelcomeMessage(String username) {
+        welcomeLabel.setText("Ciao " + username + "!");
     }
-
-    public void setWelcomeMessage(String firstName) {
-        welcomeLabel.setText("Ciao " + firstName + "!");
-    }
-
+    
     private void loadExercise(MacroExercise exercise) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MacroExercise.fxml"));
@@ -49,32 +44,37 @@ public class HomeController {
 
     @FXML
     public void handleExercise1() {
+        String username = welcomeLabel.getText().replace("Ciao ", "").replace("!", ""); // Estrai lo username dal messaggio di benvenuto
         MacroExercise exercise = new TrovaErroreExercise(
             "Esercizio 1 - Trova l'errore",
             "Trova l'errore nel seguente codice",
-            "DA MODIFICARE"
+            "DA MODIFICARE",
+            username
         );
         loadExercise(exercise);
     }
-
+    
     @FXML
     public void handleExercise2() {
+        String username = welcomeLabel.getText().replace("Ciao ", "").replace("!", ""); // Estrai lo username dal messaggio di benvenuto
         MacroExercise exercise = new OrdinaCodiceExercise(
             "Esercizio 2 - Ordina il codice",
             "Ordina il codice seguente in modo che sia corretto e funzionante",
-            "DA MODIFICARE"
+            "DA MODIFICARE",
+            username
         );
         loadExercise(exercise);
     }
-
+    
     @FXML
     public void handleExercise3() {
+        String username = welcomeLabel.getText().replace("Ciao ", "").replace("!", ""); // Estrai lo username dal messaggio di benvenuto
         MacroExercise exercise = new CompletaCodiceExercise(
             "Esercizio 3 - Completa il codice",
             "Completa il codice seguente in modo che sia corretto e funzionante",
-            "DA MODIFICARE"
+            "DA MODIFICARE",
+            username
         );
         loadExercise(exercise);
     }
-
 }

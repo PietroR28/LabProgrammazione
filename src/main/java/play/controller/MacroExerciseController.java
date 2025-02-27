@@ -40,7 +40,13 @@ public class MacroExerciseController {
     @FXML
     public void handleBack() {
         try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/Home.fxml")));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Home.fxml"));
+            Scene scene = new Scene(loader.load());
+    
+            HomeController homeController = loader.getController();
+            String username = currentExercise.getUsername();
+            homeController.setWelcomeMessage(username); // Passa il nome dell'utente
+    
             Stage stage = (Stage) codeArea.getScene().getWindow();
             stage.setScene(scene);
         } catch (Exception e) {

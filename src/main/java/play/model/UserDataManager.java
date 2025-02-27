@@ -60,8 +60,8 @@ public class UserDataManager {
         }
     }
 
-    public static String getFirstName(String username) {
+    public static String getUsername(String username) {
         User user = users.get(username);
-        return user != null ? user.getFirstName() : null;
+        return user != null ? user.getUsername() : null;
     }
 }
