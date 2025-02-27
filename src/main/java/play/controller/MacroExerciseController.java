@@ -8,7 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import play.model.MacroExercise;
 
-public class ExerciseController {
+public class MacroExerciseController {
     @FXML private Label exerciseTitle;
     @FXML private Label exerciseDescription;
     @FXML private TextArea codeArea;

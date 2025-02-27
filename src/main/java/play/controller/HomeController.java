@@ -34,10 +34,10 @@ public class HomeController {
 
     private void loadExercise(MacroExercise exercise) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Exercise.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MacroExercise.fxml"));
             Scene scene = new Scene(loader.load());
             
-            ExerciseController controller = loader.getController();
+            MacroExerciseController controller = loader.getController();
             controller.initExercise(exercise);
             
             Stage stage = (Stage) welcomeLabel.getScene().getWindow();

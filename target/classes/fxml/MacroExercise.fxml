@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="play.controller.ExerciseController"
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="play.controller.MacroExerciseController"
       alignment="CENTER" spacing="20" stylesheets="@../styles.css" styleClass="vbox">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
