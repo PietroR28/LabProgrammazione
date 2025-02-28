@@ -29,7 +29,17 @@ public class HomeController {
     
     private void loadExercise(MacroExercise exercise) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MacroExercise.fxml"));
+            FXMLLoader loader;
+            if (exercise instanceof TrovaErroreExercise) {
+                loader = new FXMLLoader(getClass().getResource("/fxml/TrovaErroreExercise.fxml"));
+            } else if (exercise instanceof OrdinaCodiceExercise) {
+                loader = new FXMLLoader(getClass().getResource("/fxml/OrdinaCodiceExercise.fxml"));
+            } else if (exercise instanceof CompletaCodiceExercise) {
+                loader = new FXMLLoader(getClass().getResource("/fxml/CompletaCodiceExercise.fxml"));
+            } else {
+                throw new IllegalArgumentException("Tipo di esercizio non supportato");
+            }
+            
             Scene scene = new Scene(loader.load());
             
             MacroExerciseController controller = loader.getController();

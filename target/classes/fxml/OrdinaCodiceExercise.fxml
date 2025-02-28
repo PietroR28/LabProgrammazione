@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.TextFlow?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="play.controller.OrdinaCodiceExerciseController"
+      alignment="CENTER" spacing="20" stylesheets="@../styles.css" styleClass="vbox">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label fx:id="exerciseTitle" styleClass="title"/>
+    <Label fx:id="exerciseDescription" styleClass="exercise-description" wrapText="true"/>
+    <TextFlow fx:id="exerciseExample" styleClass="code-area" style="-fx-background-color: white;"/>
+    
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Vai all'esercizio" onAction="#handleExerciseRedirect" styleClass="button"/>
+        <Button text="Torna alla Home" onAction="#handleBack" styleClass="button"/>
+    </HBox>
+    
+    <Label fx:id="resultLabel" styleClass="result-label"/>
+</VBox>
