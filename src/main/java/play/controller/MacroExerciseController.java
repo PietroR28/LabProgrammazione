@@ -42,11 +42,6 @@ public class MacroExerciseController {
     }
 
     @FXML
-    public void handleExerciseRedirect() {
-        // TODO: Implementare il redirect alla pagina dell'esercizio
-    }
-
-    @FXML
     public void handleBack() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Home.fxml"));
