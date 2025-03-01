@@ -3,7 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.web.WebView?>
 
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="play.controller.CompletaCodiceExerciseController"
       alignment="CENTER" spacing="20" stylesheets="@../styles.css" styleClass="vbox">
@@ -13,12 +13,10 @@
 
     <Label fx:id="exerciseTitle" styleClass="title"/>
     <Label fx:id="exerciseDescription" styleClass="exercise-description" wrapText="true"/>
-    <TextFlow fx:id="exerciseExample" styleClass="code-area" style="-fx-background-color: white;"/>
+    <WebView fx:id="exerciseExample" styleClass="code-area" style="-fx-background-color: white;"/>
     
     <HBox spacing="10" alignment="CENTER">
         <Button text="Vai all'esercizio" onAction="#handleExerciseRedirect" styleClass="button"/>
         <Button text="Torna alla Home" onAction="#handleBack" styleClass="button"/>
     </HBox>
-    
-    <Label fx:id="resultLabel" styleClass="result-label"/>
 </VBox>

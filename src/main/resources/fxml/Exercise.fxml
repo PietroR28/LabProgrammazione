@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.TextFlow?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="play.controller.TrovaErroreExerciseController"
+      alignment="CENTER" spacing="20" stylesheets="@../styles.css" styleClass="vbox">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <TextFlow fx:id="exerciseQuestion" styleClass="code-area" style="-fx-background-color: white;"/>
+    
+    <VBox spacing="10" alignment="CENTER">
+        <RadioButton fx:id="answerA" text=""/>
+        <RadioButton fx:id="answerB" text=""/>
+        <RadioButton fx:id="answerC" text=""/>
+    </VBox>
+    
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Domanda precedente" onAction="#handlePreviousQuestion" styleClass="button"/>
+        <Button text="Domanda successiva" onAction="#handleNextQuestion" styleClass="button"/>
+        <Button text="Esci dall'esercizio" onAction="#handleExitExercise" styleClass="button"/>
+    </HBox>
+</VBox>

@@ -4,15 +4,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import play.model.MacroExercise;
 
 public class MacroExerciseController {
     @FXML private Label exerciseTitle;
     @FXML private Label exerciseDescription;
-    @FXML private TextFlow exerciseExample;
+    @FXML private WebView exerciseExample;
     
     private MacroExercise currentExercise;
 
@@ -21,24 +20,9 @@ public class MacroExerciseController {
         exerciseTitle.setText(exercise.getTitle());
         exerciseDescription.setText(exercise.getDescription());
         
-        // Clear existing children
-        exerciseExample.getChildren().clear();
-        
-        // Add formatted text using Text and Label
+        // Set HTML content in WebView
         String exampleText = exercise.getExample();
-        String[] parts = exampleText.split("<span style='color:red; text-decoration: underline;'>|</span>");
-        
-        for (int i = 0; i < parts.length; i++) {
-            if (i % 2 == 0) {
-                // Normal text
-                exerciseExample.getChildren().add(new Text(parts[i]));
-            } else {
-                // Formatted text
-                Label redUnderlineText = new Label(parts[i]);
-                redUnderlineText.setStyle("-fx-text-fill: red; -fx-underline: true;");
-                exerciseExample.getChildren().add(redUnderlineText);
-            }
-        }
+        exerciseExample.getEngine().loadContent("<html><body>" + exampleText + "</body></html>");
     }
 
     @FXML
