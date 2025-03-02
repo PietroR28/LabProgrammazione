@@ -1,0 +1,110 @@
+[
+    {
+        "question": "Questo codice dovrebbe stampare 'Hello World' ma contiene un errore.",
+        "code": "public class HelloWorld {\n    public static void main(String[] args) {\n        System.out.println(\"Hello World!\")\n    }\n}",
+        "answers": [
+            "Il metodo main dovrebbe essere private invece che public.",
+            "Il metodo System.out.println è scritto in modo errato.",
+            "Manca il punto e virgola ; alla fine della riga System.out.println(\"Hello World!\")."
+        ],
+        "correctAnswerIndex": 2,
+        "macroexercise": "TrovaErrore",
+        "difficulty": "principiante"
+    },
+    {
+        "question": "Questo codice dovrebbe calcolare la somma di due numeri ma contiene un errore.",
+        "code": "public int addNumbers(int a, int b) {\n    return a + b\n}",
+        "answers": [
+            "Manca il punto e virgola ; alla fine della riga return a + b.",
+            "Il metodo dovrebbe resituire void invece di int, perché non stampa direttamente il risultato.",
+            "La somma è errata, dovrebbe essere return a * b."
+        ],
+        "correctAnswerIndex": 0,
+        "macroexercise": "TrovaErrore",
+        "difficulty": "principiante"
+    },
+    {
+        "question": "Questo codice dovrebbe stampare i numeri pari da 1 a 10, ma contiene un errore.",
+        "code": "public class PrintEvenNumbers {\n    public static void main(String[] args) {\n        for (int i = 1; i <= 10; i++) {\n            if (i % 2 == 1) {\n                System.out.println(i);\n            }\n        }\n    }\n}",
+        "answers": [
+            "Il ciclo for dovrebbe partire da 2 invece che da 1, in modo da stampare direttamente i numeri pari.",
+            "La condizione i % 2 == 1 è errata e dovrebbe essere i % 2 == 0, per stampare i numeri pari invece di quelli dispari.",
+            "Il problema è che il ciclo for deve terminare a 9 invece che a 10, per evitare di stampare un numero in più."
+        ],
+        "correctAnswerIndex": 1,
+        "macroexercise": "TrovaErrore",
+        "difficulty": "principiante"
+    },
+    {
+        "question": "Questo codice dovrebbe verificare se un numero è pari, ma contiene un errore.",
+        "code": "public boolean isEven(int number) {\n    if (number % 2 == 1) {\n        return true;\n    } else {\n        return false;\n    }\n}",
+        "answers": [
+            "Il metodo dovrebbe restituire un valore int invece di boolean, perché i numeri pari e dispari sono numeri e non valori booleani.",
+            "La condizione number % 2 == 1 è errata e dovrebbe essere number % 2 == 0, poiché attualmente restituisce true per i numeri dispari invece che per i pari.",
+            "Il codice non funziona perché manca una chiamata esplicita al metodo Math.abs() per rendere number positivo prima della verifica"
+        ],
+        "correctAnswerIndex": 1,
+        "macroexercise": "TrovaErrore",
+        "difficulty": "intermedio"
+    },
+    {
+        "question": "Questo codice dovrebbe calcolare la somma dei numeri da 1 a 'n' ma restituisce un risultato sbagliato.",
+        "code": "public int sumNumbers(int n) {\n    int sum = 0;\n    for (int i = 1; i <= n; i++) {\n        sum =+ i;\n    }\n    return sum;\n}",
+        "answers": [
+            "Il ciclo for dovrebbe iniziare da 0 invece che da 1, per includere tutti i numeri fino a n",
+            "L'operatore =+ è errato e dovrebbe essere +=, perché attualmente sum =+ i; equivale a sum = +i;, che non accumula il valore correttamente",
+            "La variabile sum dovrebbe essere dichiarata come double invece di int, perché potrebbe contenere numeri decimali"
+        ],
+        "correctAnswerIndex": 1,
+        "macroexercise": "TrovaErrore",
+        "difficulty": "intermedio"
+    },
+    {
+        "question": "Questo codice dovrebbe trovare il massimo tra tre numeri ma non funziona sempre correttamente, trova l'errore.",
+        "code": "public int findMax(int a, int b, int c) {\n    int max = a;\n    if (b > a) max = b;\n    if (c > a) max = c;\n    return max;\n}",
+        "answers": [
+            "La seconda condizione if (c > a) è errata e dovrebbe essere if (c > max), altrimenti potrebbe non aggiornare max correttamente se c è il numero più grande",
+            "Il metodo dovrebbe restituire un double invece di un int, perché potrebbe essere necessario trovare il massimo tra numeri decimali",
+            "Il metodo dovrebbe utilizzare l'operatore ternario invece di if, perché Java non supporta più le condizioni if per trovare il massimo"
+        ],
+        "correctAnswerIndex": 0,
+        "macroexercise": "TrovaErrore",
+        "difficulty": "intermedio"
+    },
+    {
+        "question": "Questo codice implementa una funzione per invertire una stringa ma restituisce un risultato errato, trova l'errore.",
+        "code": "public String reverseString(String str) {\n    String reversed = \"\";\n    for (int i = str.length() - 1; i >= 0; i--) {\n        reversed += str.charAt(i);\n    }\n    return reversed;\n}",
+        "answers": [
+            "Il ciclo for dovrebbe partire da 0 invece che da str.length() - 1, in modo da leggere la stringa nell'ordine corretto",
+            "La variabile reversed dovrebbe essere inizializzata con str invece di '', per evitare una stringa vuota come risultato",
+            "L'uso di reversed += str.charAt(i); è inefficiente, perché la concatenazione di stringhe in un ciclo crea molteplici oggetti String. Si dovrebbe usare un StringBuilder con .append()"
+        ],
+        "correctAnswerIndex": 2,
+        "macroexercise": "TrovaErrore",
+        "difficulty": "esperto"
+    },
+    {
+        "question": "Questo codice dovrebbe calcolare il fattoriale di un numero n ma non funziona correttamente, trova l'errore.",
+        "code": "public int factorial(int n) {\n    int result = 0;\n    for (int i = 1; i <= n; i++) {\n        result *= i;\n    }\n    return result;\n}",
+        "answers": [
+            "result è inizializzato a 0, quindi qualsiasi moltiplicazione con esso darà sempre 0. Dovrebbe essere inizializzato a 1",
+            "L'operatore *= è errato, dovrebbe essere += per sommare invece di moltiplicare",
+            "Il ciclo for dovrebbe partire da 0 invece che da 1, perché i numeri iniziano da 0"
+        ],
+        "correctAnswerIndex": 0,
+        "macroexercise": "TrovaErrore",
+        "difficulty": "esperto"
+    },
+    {
+        "question": "Il seguente codice tenta di trovare il minimo valore in un array ma non restituisce sempre il risultato corretto, trova l'errore.",
+        "code": "public int findMin(int[] arr) {\n    int min = 0;\n    for (int i = 1; i < arr.length; i++) {\n        if (arr[i] < min) {\n            min = arr[i];\n        }\n    }\n    return min;\n}",
+        "answers": [
+            "L'operatore < dovrebbe essere >, perché vogliamo trovare il massimo anziché il minimo",
+            "Il ciclo for dovrebbe partire da 0 invece che da 1, in modo da controllare tutti gli elementi",
+            "min è inizializzato a 0, il che è sbagliato perché se tutti gli elementi dell'array sono positivi, 0 potrebbe essere erroneamente restituito come minimo. Dovrebbe essere inizializzato con arr[0]"
+        ],
+        "correctAnswerIndex": 2,
+        "macroexercise": "TrovaErrore",
+        "difficulty": "esperto"
+    }
+]
