@@ -58,15 +58,23 @@ public class HomeController {
         MacroExercise exercise = new TrovaErroreExercise(
             "Esercizio 1 - Trova l'errore",
             "Trova l'errore nel seguente codice",
+            "<style>" +
+            ".center {" +
+            "  display: flex;" +
+            "  justify-content: center;" +
+            "}" +
+            "</style>" +
             "<pre><code>public class Main {\n" +
             "  public static void main(String[] args) {\n" +
             "    System.out.<span style='color:red; text-decoration: underline;'>printtext</span>(\"Hello World\");\n" +
             "  }\n" +
             "}</code></pre><br>" +
             "Invece che <span style='color:red; text-decoration: underline;'>printtext</span> ci va:<br>" +
-            "a) printline<br>" +
-            "b) println<br>" +
-            "c) echo()",
+            "<div class='center'>" +
+            "<input type='radio' id='a' disabled><label for='a'>printline</label><br>" +
+            "<input type='radio' id='b' disabled><label for='b'>println</label><br>" +
+            "<input type='radio' id='c' disabled><label for='c'>echo()</label>" +
+            "</div>",
             username
         );
         loadExercise(exercise);

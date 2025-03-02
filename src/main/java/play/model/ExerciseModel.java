@@ -22,26 +22,39 @@ public class ExerciseModel {
             JSONArray jsonArray = new JSONArray(new JSONTokener(reader));
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                // Modifica qui: usiamo "question" invece di "text"
-                String question = jsonObject.optString("question", "Default question");
-                String code = jsonObject.optString("code", "Default code");
-                JSONArray answersArray = jsonObject.optJSONArray("answers");
-                String[] answers = new String[3];
-                if (answersArray != null) {
-                    for (int j = 0; j < answersArray.length(); j++) {
-                        answers[j] = answersArray.optString(j, "Default answer");
+                String macroexercise = jsonObject.optString("macroexercise", "");
+                if ("TrovaErrore".equals(macroexercise)) {
+                    String question = jsonObject.optString("question", "Default question");
+                    String code = jsonObject.optString("code", "Default code");
+                    JSONArray answersArray = jsonObject.optJSONArray("answers");
+                    String[] answers = new String[3];
+                    if (answersArray != null) {
+                        for (int j = 0; j < answersArray.length(); j++) {
+                            answers[j] = answersArray.optString(j, "Default answer");
+                        }
+                    } else {
+                        answers[0] = "Default answer A";
+                        answers[1] = "Default answer B";
+                        answers[2] = "Default answer C";
                     }
-                } else {
-                    answers[0] = "Default answer A";
-                    answers[1] = "Default answer B";
-                    answers[2] = "Default answer C";
+                    int correctAnswerIndex = jsonObject.optInt("correctAnswerIndex", 0);
+                    String difficulty = jsonObject.optString("difficulty", "principiante");
+                    exercises.add(new Exercise(question, code, answers, correctAnswerIndex, difficulty));
                 }
-                int correctAnswerIndex = jsonObject.optInt("correctAnswerIndex", 0);
-                exercises.add(new Exercise(question, code, answers, correctAnswerIndex));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Exercise> getExercisesByDifficulty(String difficulty) {
+        List<Exercise> filteredExercises = new ArrayList<>();
+        for (Exercise exercise : exercises) {
+            if (exercise.getDifficulty().equals(difficulty)) {
+                filteredExercises.add(exercise);
+            }
+        }
+        return filteredExercises;
     }
 
     public Exercise getExercise(int index) {

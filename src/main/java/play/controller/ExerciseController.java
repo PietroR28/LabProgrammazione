@@ -2,16 +2,23 @@ package play.controller;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
+import java.util.List;
 
 import org.json.JSONObject;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.stage.Stage;
 import play.model.Exercise;
 import play.model.ExerciseModel;
 
@@ -20,6 +27,8 @@ public class ExerciseController {
     protected int currentExerciseIndex = 0;
     protected final ExerciseModel exerciseModel = new ExerciseModel();
     protected boolean[] exerciseResults;
+    protected List<Exercise> currentExercises;
+    protected String currentDifficulty = "principiante";
 
     @FXML
     protected TextFlow exerciseQuestion;
@@ -31,10 +40,12 @@ public class ExerciseController {
     protected RadioButton answerB;
     @FXML
     protected RadioButton answerC;
+    @FXML
+    protected Button finishExerciseButton; // Aggiungi il riferimento al pulsante
 
     public ExerciseController() {
         // Nota: Non chiamare loadExercise qui perché gli elementi FXML non sono ancora iniettati.
-        exerciseResults = new boolean[exerciseModel.getTotalExercises()];
+        loadExercisesByDifficulty(currentDifficulty);
     }
 
     // Questo metodo viene chiamato subito dopo l'iniezione degli elementi FXML
@@ -43,8 +54,13 @@ public class ExerciseController {
         loadExercise(currentExerciseIndex);
     }
 
+    protected void loadExercisesByDifficulty(String difficulty) {
+        currentExercises = exerciseModel.getExercisesByDifficulty(difficulty);
+        exerciseResults = new boolean[currentExercises.size()];
+    }
+
     protected void loadExercise(int index) {
-        Exercise exercise = exerciseModel.getExercise(index);
+        Exercise exercise = currentExercises.get(index);
         System.out.println("Loading exercise " + index);
         // Set the exercise question, code and answers
         exerciseQuestion.getChildren().clear();
@@ -54,19 +70,44 @@ public class ExerciseController {
         answerA.setText(exercise.getAnswers()[0]);
         answerB.setText(exercise.getAnswers()[1]);
         answerC.setText(exercise.getAnswers()[2]);
+
+        // Deselect all RadioButtons
+        answerA.setSelected(false);
+        answerB.setSelected(false);
+        answerC.setSelected(false);
+
+        // Mostra il pulsante "Concludi Esercizio" solo se è l'ultimo esercizio
+        if (index == currentExercises.size() - 1) {
+            finishExerciseButton.setVisible(true);
+        } else {
+            finishExerciseButton.setVisible(false);
+        }
     }
 
     protected void unlockNextDifficulty() {
-        // Logic to unlock the next difficulty level
-        System.out.println("Unlocking next difficulty level");
-        // Esempio: salva la difficoltà sbloccata su file o database
+        if ("principiante".equals(currentDifficulty)) {
+            currentDifficulty = "intermedio";
+        } else if ("intermedio".equals(currentDifficulty)) {
+            currentDifficulty = "esperto";
+        }
+        loadExercisesByDifficulty(currentDifficulty);
+        currentExerciseIndex = 0;
+        loadExercise(currentExerciseIndex);
     }
 
     protected void redirectToHome() {
-        // Logic to redirect the user to the home screen
-        System.out.println("Redirecting to home screen");
-        // Esempio: Stage stage = (Stage) someNode.getScene().getWindow();
-        // stage.setScene(homeScene);
+        try {
+            URL fxmlLocation = getClass().getResource("/fxml/Home.fxml");
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent homeRoot = loader.load();
+            Scene homeScene = new Scene(homeRoot);
+
+            // Ottieni lo stage corrente
+            Stage stage = (Stage) exerciseQuestion.getScene().getWindow();
+            stage.setScene(homeScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void registerFailure() {
@@ -83,7 +124,7 @@ public class ExerciseController {
     }
 
     protected void showFailureMessage() {
-        Alert alert = new Alert(AlertType.INFORMATION, "Hai fallito il set di esercizi. Riprova!", ButtonType.OK);
+        Alert alert = new Alert(AlertType.INFORMATION, "Hai fallito l'esercizio, stai per tornare alla Home", ButtonType.OK);
         alert.showAndWait();
     }
 
@@ -97,7 +138,7 @@ public class ExerciseController {
 
     @FXML
     protected void handleNextQuestion() {
-        if (currentExerciseIndex < exerciseModel.getTotalExercises() - 1) {
+        if (currentExerciseIndex < currentExercises.size() - 1) {
             currentExerciseIndex++;
             loadExercise(currentExerciseIndex);
         }
@@ -108,5 +149,32 @@ public class ExerciseController {
         registerFailure();
         showFailureMessage();
         redirectToHome();
+    }
+
+    @FXML
+    protected void handleFinishExercise() {
+        boolean allCorrect = true;
+        for (int i = 0; i < currentExercises.size(); i++) {
+            Exercise exercise = currentExercises.get(i);
+            int selectedAnswerIndex = -1;
+            if (answerA.isSelected()) {
+                selectedAnswerIndex = 0;
+            } else if (answerB.isSelected()) {
+                selectedAnswerIndex = 1;
+            } else if (answerC.isSelected()) {
+                selectedAnswerIndex = 2;
+            }
+            if (selectedAnswerIndex != exercise.getCorrectAnswerIndex()) {
+                allCorrect = false;
+                break;
+            }
+        }
+        if (allCorrect) {
+            unlockNextDifficulty();
+        } else {
+            registerFailure();
+            showFailureMessage();
+            redirectToHome();
+        }
     }
 }

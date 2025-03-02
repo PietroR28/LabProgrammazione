@@ -6,7 +6,8 @@
 <?import javafx.scene.web.WebView?>
 
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="play.controller.TrovaErroreExerciseController"
-      alignment="CENTER" spacing="20" stylesheets="@../styles.css" styleClass="vbox">
+      alignment="CENTER" spacing="20" stylesheets="@../styles.css" styleClass="vbox"
+      prefWidth="800" prefHeight="600">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>

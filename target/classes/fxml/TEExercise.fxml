@@ -6,7 +6,8 @@
 <?import javafx.scene.text.TextFlow?>
 
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="play.controller.ExerciseController"
-      alignment="CENTER" spacing="20" stylesheets="@../styles.css" styleClass="vbox">
+      alignment="CENTER" spacing="20" stylesheets="@../styles.css" styleClass="vbox"
+      prefWidth="800" prefHeight="600">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
@@ -23,6 +24,7 @@
     <HBox spacing="10" alignment="CENTER">
         <Button text="Domanda precedente" onAction="#handlePreviousQuestion" styleClass="button"/>
         <Button text="Domanda successiva" onAction="#handleNextQuestion" styleClass="button"/>
-        <Button text="Esci dall'esercizio" onAction="#handleExitExercise" styleClass="button"/>
+        <Button fx:id="finishExerciseButton" text="Concludi Esercizio" onAction="#handleFinishExercise" styleClass="button" visible="false"/>
+        <Button text="Esci dall'esercizio" onAction="#handleExitExercise" styleClass="button" style="-fx-background-color: red; -fx-text-fill: white;"/>
     </HBox>
 </VBox>
