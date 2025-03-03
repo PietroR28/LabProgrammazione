@@ -29,6 +29,7 @@ public class ExerciseController {
     protected boolean[] exerciseResults;
     protected List<Exercise> currentExercises;
     protected String currentDifficulty = "principiante";
+    protected String username; // Aggiungi un campo per lo username
 
     @FXML
     protected TextFlow exerciseQuestion;
@@ -46,6 +47,11 @@ public class ExerciseController {
     public ExerciseController() {
         // Nota: Non chiamare loadExercise qui perché gli elementi FXML non sono ancora iniettati.
         loadExercisesByDifficulty(currentDifficulty);
+    }
+
+    // Metodo per impostare lo username
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     // Questo metodo viene chiamato subito dopo l'iniezione degli elementi FXML
@@ -112,11 +118,11 @@ public class ExerciseController {
 
     protected void registerFailure() {
         JSONObject failureData = new JSONObject();
-        failureData.put("user", "currentUser"); // Sostituire con i dati reali dell'utente
+        failureData.put("user", username != null ? username : "defaultUser");
         failureData.put("status", "failed");
         failureData.put("exercisesCompleted", currentExerciseIndex);
 
-        try (FileWriter file = new FileWriter("user_exercise_status.json")) {
+        try (FileWriter file = new FileWriter("saves.json")) {
             file.write(failureData.toString());
         } catch (IOException e) {
             e.printStackTrace();

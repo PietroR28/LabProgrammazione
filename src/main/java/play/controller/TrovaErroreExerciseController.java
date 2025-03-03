@@ -10,11 +10,19 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class TrovaErroreExerciseController extends MacroExerciseController {
+    private String username;
+
+    public void initUsername(String username) {
+        this.username = username;
+    }
+
     @FXML
     public void handleExerciseRedirect(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TEExercise.fxml"));
             Parent root = loader.load();
+            ExerciseController controller = loader.getController();
+            controller.setUsername(username);
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);

@@ -45,6 +45,11 @@ public class HomeController {
             MacroExerciseController controller = loader.getController();
             controller.initExercise(exercise);
             
+            // Passa lo username al controller specifico
+            if (controller instanceof TrovaErroreExerciseController) {
+                ((TrovaErroreExerciseController) controller).initUsername(exercise.getUsername());
+            }
+            
             Stage stage = (Stage) welcomeLabel.getScene().getWindow();
             stage.setScene(scene);
         } catch (Exception e) {
