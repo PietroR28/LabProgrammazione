@@ -18,4 +18,7 @@
     <Button text="Trova l'errore" onAction="#handleExercise1" styleClass="button"/>
     <Button text="Ordina il codice" onAction="#handleExercise2" styleClass="button"/>
     <Button text="Completa il codice" onAction="#handleExercise3" styleClass="button"/>
+    
+    <Button text="Logout" onAction="#handleLogout" 
+            style="-fx-background-color: red; -fx-text-fill: white;"/>
 </VBox>

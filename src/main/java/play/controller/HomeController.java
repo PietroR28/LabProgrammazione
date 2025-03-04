@@ -111,4 +111,18 @@ public class HomeController {
         );
         loadExercise(exercise);
     }
+
+    @FXML
+    public void handleLogout() {
+        // Reset dello username in SessionManager
+        SessionManager.setUsername("");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = (Stage) welcomeLabel.getScene().getWindow();
+            stage.setScene(scene);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
