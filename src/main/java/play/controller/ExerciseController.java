@@ -29,7 +29,10 @@ public class ExerciseController {
     protected boolean[] exerciseResults;
     protected List<Exercise> currentExercises;
     protected String currentDifficulty = "principiante";
-    protected String username; // Aggiungi un campo per lo username
+    protected String username; // campo per lo username
+
+    // Aggiungiamo un array per salvare l'indice della risposta scelta per ogni domanda (inizialmente -1)
+    protected int[] userAnswers;
 
     @FXML
     protected TextFlow exerciseQuestion;
@@ -42,10 +45,9 @@ public class ExerciseController {
     @FXML
     protected RadioButton answerC;
     @FXML
-    protected Button finishExerciseButton; // Aggiungi il riferimento al pulsante
+    protected Button finishExerciseButton;
 
     public ExerciseController() {
-        // Nota: Non chiamare loadExercise qui perché gli elementi FXML non sono ancora iniettati.
         loadExercisesByDifficulty(currentDifficulty);
     }
 
@@ -54,7 +56,6 @@ public class ExerciseController {
         this.username = username;
     }
 
-    // Questo metodo viene chiamato subito dopo l'iniezione degli elementi FXML
     @FXML
     public void initialize() {
         loadExercise(currentExerciseIndex);
@@ -62,13 +63,17 @@ public class ExerciseController {
 
     protected void loadExercisesByDifficulty(String difficulty) {
         currentExercises = exerciseModel.getExercisesByDifficulty(difficulty);
-        exerciseResults = new boolean[currentExercises.size()];
+        // Inizializziamo l'array con -1 per indicare che nessuna risposta è stata scelta
+        userAnswers = new int[currentExercises.size()];
+        for (int i = 0; i < userAnswers.length; i++) {
+            userAnswers[i] = -1;
+        }
     }
 
     protected void loadExercise(int index) {
         Exercise exercise = currentExercises.get(index);
         System.out.println("Loading exercise " + index);
-        // Set the exercise question, code and answers
+        // Setta la domanda, il codice e le risposte
         exerciseQuestion.getChildren().clear();
         exerciseQuestion.getChildren().add(new Text(exercise.getQuestion()));
         exerciseCode.getChildren().clear();
@@ -77,10 +82,25 @@ public class ExerciseController {
         answerB.setText(exercise.getAnswers()[1]);
         answerC.setText(exercise.getAnswers()[2]);
 
-        // Deselect all RadioButtons
+        // Deseleziona i RadioButton
         answerA.setSelected(false);
         answerB.setSelected(false);
         answerC.setSelected(false);
+
+        // Se l'utente aveva già selezionato una risposta, la ripristina
+        if (userAnswers[index] != -1) {
+            switch (userAnswers[index]) {
+                case 0:
+                    answerA.setSelected(true);
+                    break;
+                case 1:
+                    answerB.setSelected(true);
+                    break;
+                case 2:
+                    answerC.setSelected(true);
+                    break;
+            }
+        }
 
         // Mostra il pulsante "Concludi Esercizio" solo se è l'ultimo esercizio
         if (index == currentExercises.size() - 1) {
@@ -90,7 +110,21 @@ public class ExerciseController {
         }
     }
 
+    // Metodo per salvare la risposta attuale
+    protected void saveCurrentAnswer() {
+        int selectedAnswerIndex = -1;
+        if (answerA.isSelected()) {
+            selectedAnswerIndex = 0;
+        } else if (answerB.isSelected()) {
+            selectedAnswerIndex = 1;
+        } else if (answerC.isSelected()) {
+            selectedAnswerIndex = 2;
+        }
+        userAnswers[currentExerciseIndex] = selectedAnswerIndex;
+    }
+
     protected void unlockNextDifficulty() {
+        registerOutcome(true);
         if ("principiante".equals(currentDifficulty)) {
             currentDifficulty = "intermedio";
         } else if ("intermedio".equals(currentDifficulty)) {
@@ -108,7 +142,6 @@ public class ExerciseController {
             Parent homeRoot = loader.load();
             Scene homeScene = new Scene(homeRoot);
 
-            // Ottieni lo stage corrente
             Stage stage = (Stage) exerciseQuestion.getScene().getWindow();
             stage.setScene(homeScene);
         } catch (IOException e) {
@@ -116,26 +149,24 @@ public class ExerciseController {
         }
     }
 
-    protected void registerFailure() {
-        JSONObject failureData = new JSONObject();
-        failureData.put("user", username != null ? username : "defaultUser");
-        failureData.put("status", "failed");
-        failureData.put("exercisesCompleted", currentExerciseIndex);
+    // Metodo per registrare il risultato (success o failed) in saves.json
+    protected void registerOutcome(boolean success) {
+        JSONObject outcomeData = new JSONObject();
+        outcomeData.put("username", username != null ? username : "defaultUser");
+        outcomeData.put("nomeEsercizio", "TrovaErrore");
+        outcomeData.put("gradoDifficolta", currentDifficulty);
+        outcomeData.put("risultato", success ? "success" : "failed");
 
         try (FileWriter file = new FileWriter("saves.json")) {
-            file.write(failureData.toString());
+            file.write(outcomeData.toString(4)); // Pretty printing con indentazione di 4 spazi
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    protected void showFailureMessage() {
-        Alert alert = new Alert(AlertType.INFORMATION, "Hai fallito l'esercizio, stai per tornare alla Home", ButtonType.OK);
-        alert.showAndWait();
-    }
-
     @FXML
     protected void handlePreviousQuestion() {
+        saveCurrentAnswer();
         if (currentExerciseIndex > 0) {
             currentExerciseIndex--;
             loadExercise(currentExerciseIndex);
@@ -144,6 +175,7 @@ public class ExerciseController {
 
     @FXML
     protected void handleNextQuestion() {
+        saveCurrentAnswer();
         if (currentExerciseIndex < currentExercises.size() - 1) {
             currentExerciseIndex++;
             loadExercise(currentExerciseIndex);
@@ -152,25 +184,21 @@ public class ExerciseController {
 
     @FXML
     protected void handleExitExercise() {
-        registerFailure();
-        showFailureMessage();
+        saveCurrentAnswer();
+        registerOutcome(false);
+        Alert alert = new Alert(AlertType.INFORMATION, "Hai fallito l'esercizio, stai per tornare alla Home", ButtonType.OK);
+        alert.showAndWait();
         redirectToHome();
     }
 
     @FXML
     protected void handleFinishExercise() {
+        // Salva la risposta corrente prima di controllare il risultato
+        saveCurrentAnswer();
         boolean allCorrect = true;
         for (int i = 0; i < currentExercises.size(); i++) {
             Exercise exercise = currentExercises.get(i);
-            int selectedAnswerIndex = -1;
-            if (answerA.isSelected()) {
-                selectedAnswerIndex = 0;
-            } else if (answerB.isSelected()) {
-                selectedAnswerIndex = 1;
-            } else if (answerC.isSelected()) {
-                selectedAnswerIndex = 2;
-            }
-            if (selectedAnswerIndex != exercise.getCorrectAnswerIndex()) {
+            if (userAnswers[i] != exercise.getCorrectAnswerIndex()) {
                 allCorrect = false;
                 break;
             }
@@ -178,8 +206,9 @@ public class ExerciseController {
         if (allCorrect) {
             unlockNextDifficulty();
         } else {
-            registerFailure();
-            showFailureMessage();
+            registerOutcome(false);
+            Alert alert = new Alert(AlertType.INFORMATION, "Hai fallito l'esercizio, stai per tornare alla Home", ButtonType.OK);
+            alert.showAndWait();
             redirectToHome();
         }
     }
