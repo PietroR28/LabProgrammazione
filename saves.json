@@ -1,0 +1,11 @@
+{
+    "Ventu": {"TrovaErrore": {
+        "esperto": {"risultato": "success"},
+        "principiante": {"risultato": "success"},
+        "intermedio": {"risultato": "success"}
+    }},
+    "user": {"TrovaErrore": {
+        "principiante": {"risultato": "success"},
+        "intermedio": {"risultato": "failed"}
+    }}
+}

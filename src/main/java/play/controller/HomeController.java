@@ -11,12 +11,12 @@ import javafx.stage.Stage;
 import play.model.CompletaCodiceExercise;
 import play.model.MacroExercise;
 import play.model.OrdinaCodiceExercise;
+import play.model.SessionManager;
 import play.model.TrovaErroreExercise;
 import play.model.User;
 
 public class HomeController {
     @FXML private Label welcomeLabel;
-
     private static Map<String, User> users = new HashMap<>();
 
     @FXML
@@ -25,6 +25,8 @@ public class HomeController {
 
     public void setWelcomeMessage(String username) {
         welcomeLabel.setText("Ciao " + username + "!");
+        // Salva lo username in SessionManager per renderlo persistente
+        SessionManager.setUsername(username);
     }
     
     private void loadExercise(MacroExercise exercise) {
@@ -59,7 +61,8 @@ public class HomeController {
 
     @FXML
     public void handleExercise1() {
-        String username = welcomeLabel.getText().replace("Ciao ", "").replace("!", ""); // Estrai lo username dal messaggio di benvenuto
+        // Recupera lo username dal SessionManager
+        String username = SessionManager.getUsername();
         MacroExercise exercise = new TrovaErroreExercise(
             "Esercizio 1 - Trova l'errore",
             "Trova l'errore nel seguente codice",
@@ -87,7 +90,7 @@ public class HomeController {
     
     @FXML
     public void handleExercise2() {
-        String username = welcomeLabel.getText().replace("Ciao ", "").replace("!", ""); // Estrai lo username dal messaggio di benvenuto
+        String username = SessionManager.getUsername();
         MacroExercise exercise = new OrdinaCodiceExercise(
             "Esercizio 2 - Ordina il codice",
             "Ordina il codice seguente in modo che sia corretto e funzionante",
@@ -99,7 +102,7 @@ public class HomeController {
     
     @FXML
     public void handleExercise3() {
-        String username = welcomeLabel.getText().replace("Ciao ", "").replace("!", ""); // Estrai lo username dal messaggio di benvenuto
+        String username = SessionManager.getUsername();
         MacroExercise exercise = new CompletaCodiceExercise(
             "Esercizio 3 - Completa il codice",
             "Completa il codice seguente in modo che sia corretto e funzionante",

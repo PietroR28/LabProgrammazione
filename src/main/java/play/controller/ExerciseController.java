@@ -1,8 +1,11 @@
 package play.controller;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -28,7 +31,8 @@ public class ExerciseController {
     protected final ExerciseModel exerciseModel = new ExerciseModel();
     protected boolean[] exerciseResults;
     protected List<Exercise> currentExercises;
-    protected String currentDifficulty = "principiante";
+    // Modifica: campo statico per mantenere il livello aggiornato tra le istanze
+    protected static String currentDifficulty = "principiante";
     protected String username; // campo per lo username
 
     // Aggiungiamo un array per salvare l'indice della risposta scelta per ogni domanda (inizialmente -1)
@@ -51,13 +55,13 @@ public class ExerciseController {
         loadExercisesByDifficulty(currentDifficulty);
     }
 
-    // Metodo per impostare lo username
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     @FXML
     public void initialize() {
+    }
+
+    public void initData(String username) {
+        // Assegna direttamente lo username passato, senza fallback
+        this.username = username;
         loadExercise(currentExerciseIndex);
     }
 
@@ -124,12 +128,12 @@ public class ExerciseController {
     }
 
     protected void unlockNextDifficulty() {
-        registerOutcome(true);
         if ("principiante".equals(currentDifficulty)) {
             currentDifficulty = "intermedio";
         } else if ("intermedio".equals(currentDifficulty)) {
             currentDifficulty = "esperto";
         }
+        // Carica i nuovi esercizi per la nuova difficoltà
         loadExercisesByDifficulty(currentDifficulty);
         currentExerciseIndex = 0;
         loadExercise(currentExerciseIndex);
@@ -149,18 +153,54 @@ public class ExerciseController {
         }
     }
 
-    // Metodo per registrare il risultato (success o failed) in saves.json
     protected void registerOutcome(boolean success) {
-        JSONObject outcomeData = new JSONObject();
-        outcomeData.put("username", username != null ? username : "defaultUser");
-        outcomeData.put("nomeEsercizio", "TrovaErrore");
-        outcomeData.put("gradoDifficolta", currentDifficulty);
-        outcomeData.put("risultato", success ? "success" : "failed");
-
-        try (FileWriter file = new FileWriter("saves.json")) {
-            file.write(outcomeData.toString(4)); // Pretty printing con indentazione di 4 spazi
+        // Dati riguardanti il risultato dell'esercizio
+        JSONObject newOutcome = new JSONObject();
+        newOutcome.put("risultato", success ? "success" : "failed");
+    
+        String exerciseName = "TrovaErrore";
+        JSONObject savesData;
+        File file = new File("saves.json");
+    
+        if (file.exists()) {
+            try {
+                String content = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
+                if (content.trim().isEmpty()) {
+                    savesData = new JSONObject();
+                } else {
+                    savesData = new JSONObject(content);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                savesData = new JSONObject();
+            }
+        } else {
+            savesData = new JSONObject();
+        }
+    
+        JSONObject userSavesObj;
+        if (savesData.has(username)) {
+            userSavesObj = savesData.getJSONObject(username);
+        } else {
+            userSavesObj = new JSONObject();
+        }
+    
+        JSONObject exerciseSavesObj;
+        if (userSavesObj.has(exerciseName)) {
+            exerciseSavesObj = userSavesObj.getJSONObject(exerciseName);
+        } else {
+            exerciseSavesObj = new JSONObject();
+        }
+    
+        // Sovrascrive il risultato per il grado di difficoltà corrente, mantenendo un solo valore
+        exerciseSavesObj.put(currentDifficulty, newOutcome);
+        userSavesObj.put(exerciseName, exerciseSavesObj);
+        savesData.put(username, userSavesObj);
+    
+        try (FileWriter writer = new FileWriter(file)) {
+             writer.write(savesData.toString(4));
         } catch (IOException e) {
-            e.printStackTrace();
+             e.printStackTrace();
         }
     }
 
@@ -204,7 +244,12 @@ public class ExerciseController {
             }
         }
         if (allCorrect) {
+            registerOutcome(true);
+            // Aggiorna la difficoltà prima del redirect alla Home
             unlockNextDifficulty();
+            Alert alert = new Alert(AlertType.INFORMATION, "Complimenti, hai superato il livello", ButtonType.OK);
+            alert.showAndWait();
+            redirectToHome();
         } else {
             registerOutcome(false);
             Alert alert = new Alert(AlertType.INFORMATION, "Hai fallito l'esercizio, stai per tornare alla Home", ButtonType.OK);
