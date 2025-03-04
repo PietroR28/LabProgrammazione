@@ -19,6 +19,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
@@ -57,6 +58,10 @@ public class ExerciseController {
 
     @FXML
     public void initialize() {
+        ToggleGroup group = new ToggleGroup();
+        answerA.setToggleGroup(group);
+        answerB.setToggleGroup(group);
+        answerC.setToggleGroup(group);
     }
 
     public void initData(String username) {
