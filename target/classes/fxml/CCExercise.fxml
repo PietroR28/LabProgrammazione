@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.web.WebView?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="play.controller.CompletaCodiceController"
+      alignment="CENTER" spacing="20" stylesheets="@../styles.css" styleClass="vbox"
+      prefWidth="800" prefHeight="600">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <TextFlow fx:id="exerciseQuestion" styleClass="title"/>
+    <TextFlow fx:id="exerciseCode" styleClass="code-area"/>
+    
+    <VBox spacing="10" alignment="CENTER">
+        <TextField fx:id="codeInput" promptText="Inserisci qui il codice mancante" styleClass="text-field" prefWidth="500"/>
+    </VBox>
+    
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Domanda precedente" onAction="#handlePreviousQuestion" styleClass="button"/>
+        <Button text="Domanda successiva" onAction="#handleNextQuestion" styleClass="button"/>
+        <Button fx:id="finishExerciseButton" text="Concludi Esercizio" onAction="#handleFinishExercise" styleClass="button" visible="false"/>
+        <Button text="Esci dall'esercizio" onAction="#handleExitExercise" styleClass="button" style="-fx-background-color: red; -fx-text-fill: white;"/>
+    </HBox>
+    <Label fx:id="resultLabel" styleClass="result-label" visible="false"/>
+</VBox>

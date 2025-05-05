@@ -50,6 +50,8 @@ public class HomeController {
             // Passa lo username al controller specifico
             if (controller instanceof TrovaErroreExerciseController) {
                 ((TrovaErroreExerciseController) controller).initUsername(exercise.getUsername());
+            } else if (controller instanceof CompletaCodiceExerciseController) {
+                ((CompletaCodiceExerciseController) controller).initUsername(exercise.getUsername());
             }
             
             Stage stage = (Stage) welcomeLabel.getScene().getWindow();
@@ -105,8 +107,21 @@ public class HomeController {
         String username = SessionManager.getUsername();
         MacroExercise exercise = new CompletaCodiceExercise(
             "Esercizio 3 - Completa il codice",
-            "Completa il codice seguente in modo che sia corretto e funzionante",
-            "DA MODIFICARE",
+            "Completa il codice inserendo le parti mancanti per farlo funzionare correttamente",
+            "<style>" +
+            ".center {" +
+            "  display: flex;" +
+            "  justify-content: center;" +
+            "}" +
+            "</style>" +
+            "<pre><code>public class Calcolatrice {\n" +
+            "  public static void main(String[] args) {\n" +
+            "    int a = 5;\n" +
+            "    int b = 3;\n" +
+            "    // inserisci qui il codice per calcolare e stampare la somma\n" +
+            "    // ______\n" +
+            "  }\n" +
+            "}</code></pre>",
             username
         );
         loadExercise(exercise);
