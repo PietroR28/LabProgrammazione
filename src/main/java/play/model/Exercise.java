@@ -5,14 +5,14 @@ public class Exercise {
     private String code;
     private String[] answers;
     private int correctAnswerIndex;
-    private String difficulty; // Aggiungi questo campo
+    private String difficulty;
 
     public Exercise(String question, String code, String[] answers, int correctAnswerIndex, String difficulty) {
         this.question = question;
         this.code = code;
         this.answers = answers;
         this.correctAnswerIndex = correctAnswerIndex;
-        this.difficulty = difficulty; // Inizializza questo campo
+        this.difficulty = difficulty;
     }
 
     public String getQuestion() {
@@ -32,6 +32,12 @@ public class Exercise {
     }
 
     public String getDifficulty() {
-        return difficulty; // Aggiungi questo getter
+        return difficulty;
+    }
+
+    // Metodo per gli esercizi OrdinaCodice, restituisce un array vuoto per default
+    // Verrà sovrascritto nelle classi figlie
+    public int[] getCorrectOrder() {
+        return new int[0];
     }
 }

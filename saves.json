@@ -1,4 +1,9 @@
 {
+    "Biacco": {
+        "TrovaErrore": {"principiante": {"risultato": "failed"}},
+        "CompletaCodice": {"principiante": {"risultato": "success"}},
+        "OrdinaCodice": {"principiante": {"risultato": "failed"}}
+    },
     "Ventu": {"TrovaErrore": {
         "esperto": {"risultato": "success"},
         "principiante": {"risultato": "success"},

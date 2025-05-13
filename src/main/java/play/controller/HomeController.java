@@ -89,15 +89,34 @@ public class HomeController {
         );
         loadExercise(exercise);
     }
-    
+
     @FXML
     public void handleExercise2() {
         String username = SessionManager.getUsername();
         MacroExercise exercise = new OrdinaCodiceExercise(
-            "Esercizio 2 - Ordina il codice",
-            "Ordina il codice seguente in modo che sia corretto e funzionante",
-            "DA MODIFICARE",
-            username
+                "Esercizio 2 - Ordina il codice",
+                "Ordina il codice seguente in modo che sia corretto e funzionante",
+                "<style>" +
+                        ".code-preview {" +
+                        "  font-family: 'Consolas', 'Monaco', monospace;" +
+                        "  font-size: 14px;" +
+                        "  background-color: #f8f9fa;" +
+                        "  border: 1px solid #e9ecef;" +
+                        "  border-radius: 5px;" +
+                        "  padding: 10px;" +
+                        "  white-space: pre;" +
+                        "  display: block;" +
+                        "}" +
+                        "</style>" +
+                        "<div class='code-preview'>" +
+                        "public class HelloWorld {\n" +
+                        "    System.out.println(\"Hello World!\");\n" +
+                        "    public static void main(String[] args) {\n" +
+                        "}\n" +
+                        "}\n" +
+                        "</div>" +
+                        "<p>Ordina le righe di codice in modo corretto utilizzando drag & drop o i pulsanti di movimento.</p>",
+                username
         );
         loadExercise(exercise);
     }

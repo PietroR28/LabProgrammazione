@@ -5,7 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9750d18a-27b6-4a31-bca9-5ab70ada1d9e" name="Changes" comment="Modificati MVC riguardanti Login e Registrazione">
+      <change afterPath="$PROJECT_DIR$/src/main/java/play/controller/OrdinaCodiceController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/play/model/OrdinaCodiceExerciseItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/play/model/OrdinaCodiceExerciseModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/OCExercise.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_02_2025_11_04_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_02_2025_11_04__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_02_2025_11_38_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_02_2025_11_38__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_02_2025_12_21_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_18_02_2025_12_21__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exercises.json" beforeDir="false" afterPath="$PROJECT_DIR$/exercises.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/play/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/play/controller/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/play/controller/OrdinaCodiceExerciseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/play/controller/OrdinaCodiceExerciseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/play/model/Exercise.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/play/model/Exercise.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/controller/CompletaCodiceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/controller/CompletaCodiceController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/controller/CompletaCodiceExerciseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/controller/CompletaCodiceExerciseController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/controller/ExerciseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/controller/ExerciseController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/controller/HomeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/controller/HomeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/model/CompletaCodiceExercise.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/model/CompletaCodiceExercise.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/model/Exercise.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/model/Exercise.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/model/ExerciseModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/model/ExerciseModel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
@@ -13,6 +35,14 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -23,20 +53,12 @@
     &quot;assignee&quot;: &quot;Ventu02&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/PietroR28/LabProgrammazione.git&quot;,
-    &quot;accountId&quot;: &quot;c6251f39-f0f0-4871-9682-724a6534cd44&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/PietroR28/LabProgrammazione.git",
+    "accountId": "4fe5bd1a-f86d-416f-806c-e557b7937f6b"
   }
-}</component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="customMavenHome" value="D:\apache-maven-3.9.9" />
-        <option name="mavenHomeTypeForPersistence" value="CUSTOM" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -46,28 +68,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Application.Play.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Application.Play.executor": "Run",
+    "Maven.Play [compile].executor": "Run",
+    "Maven.Play [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
+    "Maven.Play [test].executor": "Run",
+    "Maven.Play [verify].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Play" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="play.Play" />
@@ -92,8 +118,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.24978.46" />
-        <option value="bundled-js-predefined-d6986cc7102b-76f8388c3a79-JavaScript-IU-243.24978.46" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.24807.4" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.24807.4" />
       </set>
     </attachedChunks>
   </component>
@@ -108,6 +134,7 @@
       <workItem from="1739872691547" duration="3109000" />
       <workItem from="1739876043507" duration="1749000" />
       <workItem from="1739877936823" duration="4853000" />
+      <workItem from="1747120292363" duration="5594000" />
     </task>
     <task id="LOCAL-00001" summary="Modificati MVC riguardanti Login e Registrazione">
       <option name="closed" value="true" />

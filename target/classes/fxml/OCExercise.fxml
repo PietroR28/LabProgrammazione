@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" alignment="CENTER" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="play.controller.OrdinaCodiceController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20" />
+    </padding>
+
+    <Label fx:id="exerciseQuestion" styleClass="exercise-description" wrapText="true" />
+
+    <VBox fx:id="codeContainer" styleClass="code-area" spacing="5" alignment="CENTER_LEFT">
+        <!-- Gli elementi di codice verranno aggiunti qui dinamicamente -->
+    </VBox>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Sposta Su" onAction="#handleMoveUp" />
+        <Button text="Sposta Giù" onAction="#handleMoveDown" />
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Domanda Precedente" onAction="#handlePreviousQuestion" />
+        <Button text="Domanda Successiva" onAction="#handleNextQuestion" />
+        <Button text="Esci" onAction="#handleExitExercise" />
+        <Button fx:id="finishExerciseButton" text="Termina Esercizio" onAction="#handleFinishExercise" visible="false" />
+    </HBox>
+
+    <Label fx:id="resultLabel" styleClass="result-label" visible="false" />
+</VBox>
