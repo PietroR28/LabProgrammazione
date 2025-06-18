@@ -4,6 +4,14 @@
         "CompletaCodice": {"principiante": {"risultato": "success"}},
         "OrdinaCodice": {"principiante": {"risultato": "failed"}}
     },
+    "prova": {
+        "TrovaErrore": {
+            "principiante": {"risultato": "success"},
+            "intermedio": {"risultato": "success"}
+        },
+        "CompletaCodice": {"principiante": {"risultato": "success"}},
+        "OrdinaCodice": {"principiante": {"risultato": "failed"}}
+    },
     "Ventu": {"TrovaErrore": {
         "esperto": {"risultato": "success"},
         "principiante": {"risultato": "success"},
