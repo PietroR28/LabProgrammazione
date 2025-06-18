@@ -18,6 +18,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
@@ -26,6 +27,7 @@ import javafx.stage.Stage;
 import play.model.Exercise;
 import play.model.ExerciseModel;
 import play.model.SessionManager;
+import play.model.Timer;
 
 public class ExerciseController {
 
@@ -39,6 +41,9 @@ public class ExerciseController {
 
     // Aggiungiamo un array per salvare l'indice della risposta scelta per ogni domanda (inizialmente -1)
     protected int[] userAnswers;
+    
+    // Timer fields
+    private Timer timer;
 
     @FXML
     protected TextFlow exerciseQuestion;
@@ -52,20 +57,23 @@ public class ExerciseController {
     protected RadioButton answerC;
     @FXML
     protected Button finishExerciseButton;
+    @FXML
+    protected Label timerLabel;
 
     public ExerciseController() {
 
-    }
-
-    @FXML
+    }    @FXML
     public void initialize() {
         ToggleGroup group = new ToggleGroup();
         answerA.setToggleGroup(group);
         answerB.setToggleGroup(group);
         answerC.setToggleGroup(group);
-    }
-
-    public void initData(String username) {
+        
+        // Initialize timer label
+        if (timerLabel == null) {
+            timerLabel = new Label("Tempo: 00:00");
+        }
+    }    public void initData(String username) {
         this.username = username;
 
         // Determina la difficoltà corretta basata sui progressi dell'utente
@@ -74,6 +82,10 @@ public class ExerciseController {
 
         loadExercisesByDifficulty(currentDifficulty);
         loadExercise(currentExerciseIndex);
+        
+        // Start timer when exercise begins
+        timer = new Timer(timerLabel);
+        timer.startTimer();
     }
 
     protected void loadExercisesByDifficulty(String difficulty) {
@@ -186,56 +198,65 @@ public class ExerciseController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    protected void registerOutcome(boolean success) {
+    }    protected void registerOutcome(boolean success) {
+        // Stop the timer when exercise is completed
+        long timeInSeconds = 0;
+        if (timer != null) {
+            timer.stopTimer();
+            timeInSeconds = timer.getElapsedTimeInSeconds();
+        }
+        
         // Dati riguardanti il risultato dell'esercizio
         JSONObject newOutcome = new JSONObject();
         newOutcome.put("risultato", success ? "success" : "failed");
-    
+        newOutcome.put("tempo", timeInSeconds);
+
         String exerciseName = "TrovaErrore";
         JSONObject savesData;
         File file = new File("saves.json");
-    
+
         if (file.exists()) {
             try {
                 String content = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
-                if (content.trim().isEmpty()) {
+                content = content.trim();
+                
+                if (content.isEmpty() || content.equals("{}")) {
                     savesData = new JSONObject();
                 } else {
                     savesData = new JSONObject(content);
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (IOException | org.json.JSONException e) {
+                System.err.println("Errore nella lettura di saves.json, creazione nuovo file: " + e.getMessage());
                 savesData = new JSONObject();
             }
         } else {
             savesData = new JSONObject();
         }
-    
+
         JSONObject userSavesObj;
         if (savesData.has(username)) {
             userSavesObj = savesData.getJSONObject(username);
         } else {
             userSavesObj = new JSONObject();
         }
-    
+
         JSONObject exerciseSavesObj;
         if (userSavesObj.has(exerciseName)) {
             exerciseSavesObj = userSavesObj.getJSONObject(exerciseName);
         } else {
             exerciseSavesObj = new JSONObject();
         }
-    
-        // Sovrascrive il risultato per il grado di difficoltà corrente, mantenendo un solo valore
+
+        // Sovrascrive il risultato per il grado di difficoltà corrente
         exerciseSavesObj.put(currentDifficulty, newOutcome);
         userSavesObj.put(exerciseName, exerciseSavesObj);
         savesData.put(username, userSavesObj);
-    
+
         try (FileWriter writer = new FileWriter(file)) {
-             writer.write(savesData.toString(4));
+            // Scrivi il JSON con indentazione per renderlo più leggibile
+            writer.write(savesData.toString(2));
         } catch (IOException e) {
-             e.printStackTrace();
+            System.err.println("Errore nella scrittura del file saves.json: " + e.getMessage());
         }
     }
 

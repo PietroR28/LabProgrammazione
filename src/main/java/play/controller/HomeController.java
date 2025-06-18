@@ -148,19 +148,37 @@ public class HomeController {
      */
     private JSONObject loadSavesData() {
         File file = new File("saves.json");
-        if (!file.exists()) {
-            return null;
-        }
-
-        try {
-            String content = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
-            if (content.trim().isEmpty()) {
-                return null;
+        if (file.exists()) {
+            try {
+                String content = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
+                // Rimuovi eventuali caratteri di controllo o spazi extra
+                content = content.trim();
+                
+                // Se il file è vuoto o contiene solo "{}", restituisci un oggetto vuoto
+                if (content.isEmpty() || content.equals("{}")) {
+                    return new JSONObject();
+                }
+                
+                return new JSONObject(content);
+            } catch (IOException e) {
+                System.err.println("Errore nella lettura del file saves.json: " + e.getMessage());
+                return new JSONObject();
+            } catch (org.json.JSONException e) {
+                System.err.println("Errore nel parsing JSON di saves.json: " + e.getMessage());
+                System.err.println("Creazione di un nuovo file saves.json...");
+                
+                // Crea un backup del file corrotto
+                try {
+                    Files.move(file.toPath(), new File("saves_backup.json").toPath());
+                    System.err.println("File corrotto salvato come saves_backup.json");
+                } catch (IOException backupError) {
+                    System.err.println("Impossibile creare backup: " + backupError.getMessage());
+                }
+                
+                return new JSONObject();
             }
-            return new JSONObject(content);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+        } else {
+            return new JSONObject();
         }
     }
 

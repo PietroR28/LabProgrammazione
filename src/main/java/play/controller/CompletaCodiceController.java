@@ -18,6 +18,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -25,6 +26,7 @@ import javafx.stage.Stage;
 import play.model.Exercise;
 import play.model.ExerciseModel;
 import play.model.SessionManager;
+import play.model.Timer;
 
 public class CompletaCodiceController {
 
@@ -34,6 +36,9 @@ public class CompletaCodiceController {
     protected static String currentDifficulty = "principiante";
     protected String username;
     protected String[] userAnswers;
+    
+    // Timer field
+    private Timer timer;
 
     @FXML
     protected TextFlow exerciseQuestion;
@@ -43,6 +48,8 @@ public class CompletaCodiceController {
     protected TextField codeInput;
     @FXML
     protected Button finishExerciseButton;
+    @FXML
+    protected Label timerLabel;
 
     public CompletaCodiceController() {
 
@@ -50,7 +57,10 @@ public class CompletaCodiceController {
 
     @FXML
     public void initialize() {
-        // Inizializzazione semplice
+        // Initialize timer label
+        if (timerLabel == null) {
+            timerLabel = new Label("Tempo: 00:00");
+        }
     }
 
     public void initData(String username) {
@@ -62,6 +72,10 @@ public class CompletaCodiceController {
 
         loadExercisesByDifficulty(currentDifficulty);
         loadExercise(currentExerciseIndex);
+        
+        // Start timer when exercise begins
+        timer = new Timer(timerLabel);
+        timer.startTimer();
     }
 
     protected void loadExercisesByDifficulty(String difficulty) {
@@ -129,8 +143,16 @@ public class CompletaCodiceController {
     }
 
     protected void registerOutcome(boolean success) {
+        // Stop the timer when exercise is completed
+        long timeInSeconds = 0;
+        if (timer != null) {
+            timer.stopTimer();
+            timeInSeconds = timer.getElapsedTimeInSeconds();
+        }
+        
         JSONObject newOutcome = new JSONObject();
         newOutcome.put("risultato", success ? "success" : "failed");
+        newOutcome.put("tempo", timeInSeconds); // Add time to the outcome
     
         String exerciseName = "CompletaCodice";
         JSONObject savesData;
@@ -139,13 +161,15 @@ public class CompletaCodiceController {
         if (file.exists()) {
             try {
                 String content = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
-                if (content.trim().isEmpty()) {
+                content = content.trim();
+                
+                if (content.isEmpty() || content.equals("{}")) {
                     savesData = new JSONObject();
                 } else {
                     savesData = new JSONObject(content);
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (IOException | org.json.JSONException e) {
+                System.err.println("Errore nella lettura di saves.json, creazione nuovo file: " + e.getMessage());
                 savesData = new JSONObject();
             }
         } else {
@@ -166,14 +190,16 @@ public class CompletaCodiceController {
             exerciseSavesObj = new JSONObject();
         }
     
+        // Sovrascrive il risultato per il grado di difficoltà corrente
         exerciseSavesObj.put(currentDifficulty, newOutcome);
         userSavesObj.put(exerciseName, exerciseSavesObj);
         savesData.put(username, userSavesObj);
     
         try (FileWriter writer = new FileWriter(file)) {
-             writer.write(savesData.toString(4));
+            // Scrivi il JSON con indentazione per renderlo più leggibile
+            writer.write(savesData.toString(2));
         } catch (IOException e) {
-             e.printStackTrace();
+            System.err.println("Errore nella scrittura del file saves.json: " + e.getMessage());
         }
     }
 

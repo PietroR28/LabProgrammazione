@@ -38,6 +38,7 @@ import javafx.stage.Stage;
 import play.model.Exercise;
 import play.model.OrdinaCodiceExerciseModel;
 import play.model.SessionManager;
+import play.model.Timer;
 
 public class OrdinaCodiceController {
 
@@ -47,6 +48,9 @@ public class OrdinaCodiceController {
     protected static String currentDifficulty = "principiante";
     protected String username;
     protected int selectedLineIndex = -1;
+    
+    // Timer field
+    private Timer timer;
 
     // Lista che memorizza l'ordinamento corrente creato dall'utente
     protected List<Integer> currentUserOrder = new ArrayList<>();
@@ -59,6 +63,8 @@ public class OrdinaCodiceController {
     protected Button finishExerciseButton;
     @FXML
     protected Label resultLabel;
+    @FXML
+    protected Label timerLabel;
 
     protected ListView<String> codeListView;
 
@@ -68,6 +74,12 @@ public class OrdinaCodiceController {
 
     @FXML
     public void initialize() {
+        // Initialize timer label
+        if (timerLabel == null) {
+            timerLabel = new Label("Tempo: 00:00");
+            codeContainer.getChildren().add(0, timerLabel); // Add timer at top of container
+        }
+        
         // Inizializza la ListView per il codice
         codeListView = new ListView<>();
         codeListView.getStyleClass().add("code-area");
@@ -175,6 +187,10 @@ public class OrdinaCodiceController {
 
         loadExercisesByDifficulty(currentDifficulty);
         loadExercise(currentExerciseIndex);
+        
+        // Start timer when exercise begins
+        timer = new Timer(timerLabel);
+        timer.startTimer();
     }
 
     protected void loadExercisesByDifficulty(String difficulty) {
@@ -312,6 +328,13 @@ public class OrdinaCodiceController {
     }
 
     protected void registerOutcome(boolean success) {
+        // Stop the timer when exercise is completed
+        long timeInSeconds = 0;
+        if (timer != null) {
+            timer.stopTimer();
+            timeInSeconds = timer.getElapsedTimeInSeconds();
+        }
+        
         // Controllo aggiuntivo per evitare NullPointerException
         if (username == null || username.trim().isEmpty()) {
             username = SessionManager.getUsername();
@@ -322,6 +345,7 @@ public class OrdinaCodiceController {
 
         JSONObject newOutcome = new JSONObject();
         newOutcome.put("risultato", success ? "success" : "failed");
+        newOutcome.put("tempo", timeInSeconds); // Add time to the outcome
 
         String exerciseName = "OrdinaCodice";
         JSONObject savesData;
@@ -330,13 +354,15 @@ public class OrdinaCodiceController {
         if (file.exists()) {
             try {
                 String content = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
-                if (content.trim().isEmpty()) {
+                content = content.trim();
+                
+                if (content.isEmpty() || content.equals("{}")) {
                     savesData = new JSONObject();
                 } else {
                     savesData = new JSONObject(content);
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (IOException | org.json.JSONException e) {
+                System.err.println("Errore nella lettura di saves.json, creazione nuovo file: " + e.getMessage());
                 savesData = new JSONObject();
             }
         } else {
@@ -357,14 +383,16 @@ public class OrdinaCodiceController {
             exerciseSavesObj = new JSONObject();
         }
 
+        // Sovrascrive il risultato per il grado di difficoltà corrente
         exerciseSavesObj.put(currentDifficulty, newOutcome);
         userSavesObj.put(exerciseName, exerciseSavesObj);
         savesData.put(username, userSavesObj);
 
         try (FileWriter writer = new FileWriter(file)) {
-            writer.write(savesData.toString(4));
+            // Scrivi il JSON con indentazione per renderlo più leggibile
+            writer.write(savesData.toString(2));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Errore nella scrittura del file saves.json: " + e.getMessage());
         }
     }
 

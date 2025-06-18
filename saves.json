@@ -1,49 +1,50 @@
 {
-    "Biacco": {
-        "TrovaErrore": {
-            "principiante": {"risultato": "success"},
-            "intermedio": {"risultato": "failed"}
-        },
-        "CompletaCodice": {
-            "principiante": {"risultato": "success"},
-            "intermedio": {"risultato": "success"}
-        },
-        "OrdinaCodice": {"principiante": {"risultato": "failed"}}
-    },
-<<<<<<< Updated upstream
-    "prova": {
-        "TrovaErrore": {
-            "principiante": {"risultato": "success"},
-            "intermedio": {"risultato": "success"}
-        },
-        "CompletaCodice": {"principiante": {"risultato": "success"}},
-        "OrdinaCodice": {"principiante": {"risultato": "failed"}}
-    },
-    "admin": {
-        "TrovaErrore": {
-            "esperto": {"risultato": "success"},
-            "principiante": {"risultato": "success"},
-            "intermedio": {"risultato": "success"}
-        },
-        "CompletaCodice": {
-            "esperto": {"risultato": "success"},
-            "principiante": {"risultato": "success"},
-            "intermedio": {"risultato": "success"}
-        }
-    },
-=======
-    "prova": {"TrovaErrore": {
-        "principiante": {"risultato": "success"},
-        "intermedio": {"risultato": "failed"}
+  "Biacco": {
+    "TrovaErrore": {"principiante": {
+      "tempo": 45,
+      "risultato": "failed"
     }},
->>>>>>> Stashed changes
-    "Ventu": {"TrovaErrore": {
-        "esperto": {"risultato": "success"},
-        "principiante": {"risultato": "success"},
-        "intermedio": {"risultato": "success"}
+    "CompletaCodice": {"principiante": {
+      "tempo": 67,
+      "risultato": "success"
     }},
-    "user": {"TrovaErrore": {
-        "principiante": {"risultato": "success"},
-        "intermedio": {"risultato": "failed"}
+    "OrdinaCodice": {"principiante": {
+      "tempo": 123,
+      "risultato": "failed"
     }}
+  },
+  "prova": {
+    "TrovaErrore": {
+      "esperto": {
+        "tempo": 4,
+        "risultato": "success"
+      },
+      "principiante": {
+        "tempo": 32,
+        "risultato": "success"
+      },
+      "intermedio": {
+        "tempo": 21,
+        "risultato": "success"
+      }
+    },
+    "CompletaCodice": {"principiante": {
+      "tempo": 8,
+      "risultato": "success"
+    }}
+  },
+  "Ventu": {"TrovaErrore": {
+    "esperto": {
+      "tempo": 91,
+      "risultato": "success"
+    },
+    "principiante": {
+      "tempo": 28,
+      "risultato": "success"
+    },
+    "intermedio": {
+      "tempo": 65,
+      "risultato": "success"
+    }
+  }}
 }

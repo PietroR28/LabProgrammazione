@@ -7,11 +7,12 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="play.controller.ExerciseController"
       alignment="CENTER" spacing="20" stylesheets="@../styles.css" styleClass="vbox"
-      prefWidth="800" prefHeight="600">
-    <padding>
+      prefWidth="800" prefHeight="600">    <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
+    <Label fx:id="timerLabel" text="Tempo: 00:00" style="-fx-font-weight: bold; -fx-padding: 5px; -fx-background-color: #f0f0f0; -fx-border-color: #cccccc; -fx-border-radius: 5px; -fx-background-radius: 5px;" alignment="CENTER"/>
+    
     <TextFlow fx:id="exerciseQuestion" styleClass="title"/>
     <TextFlow fx:id="exerciseCode" styleClass="code-area" style="-fx-background-color: white;"/>
     

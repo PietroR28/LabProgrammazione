@@ -4,10 +4,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<VBox spacing="10" alignment="CENTER" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="play.controller.OrdinaCodiceController">
-    <padding>
+<VBox spacing="10" alignment="CENTER" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="play.controller.OrdinaCodiceController">    <padding>
         <Insets top="20" right="20" bottom="20" left="20" />
     </padding>
+
+    <Label fx:id="timerLabel" text="Tempo: 00:00" style="-fx-font-weight: bold; -fx-padding: 5px; -fx-background-color: #f0f0f0; -fx-border-color: #cccccc; -fx-border-radius: 5px; -fx-background-radius: 5px;" alignment="CENTER"/>
 
     <Label fx:id="exerciseQuestion" styleClass="exercise-description" wrapText="true" />
 
