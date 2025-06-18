@@ -1,4 +1,3 @@
-// filepath: /c:/Users/ventu/Desktop/LabProgrammazione/src/main/java/play/model/User.java
 package play.model;
 
 public class User {

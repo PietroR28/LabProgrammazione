@@ -10,6 +10,7 @@
         },
         "OrdinaCodice": {"principiante": {"risultato": "failed"}}
     },
+<<<<<<< Updated upstream
     "prova": {
         "TrovaErrore": {
             "principiante": {"risultato": "success"},
@@ -30,6 +31,12 @@
             "intermedio": {"risultato": "success"}
         }
     },
+=======
+    "prova": {"TrovaErrore": {
+        "principiante": {"risultato": "success"},
+        "intermedio": {"risultato": "failed"}
+    }},
+>>>>>>> Stashed changes
     "Ventu": {"TrovaErrore": {
         "esperto": {"risultato": "success"},
         "principiante": {"risultato": "success"},

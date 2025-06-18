@@ -36,14 +36,14 @@
         "difficulty": "principiante"
     },
     {
-        "question": "Questo codice dovrebbe verificare se un numero è pari, ma contiene un errore.",
-        "code": "public boolean isEven(int number) {\n    if (number % 2 == 1) {\n        return true;\n    } else {\n        return false;\n    }\n}",
+        "question": "Questo metodo dovrebbe restituire true solo se tutti gli elementi dell'array sono maggiori di zero, ma restituisce true anche quando ci sono valori negativi. Qual è l'errore?",
+        "code": "public boolean allPositive(int[] arr) {\n    boolean result = false;\n    for (int i = 0; i < arr.length; i++) {\n        if (arr[i] > 0) {\n            result = true;\n        }\n    }\n    return result;\n}",
         "answers": [
-            "Il metodo dovrebbe restituire un valore int invece di boolean, perché i numeri pari e dispari sono numeri e non valori booleani.",
-            "La condizione number % 2 == 1 è errata e dovrebbe essere number % 2 == 0, poiché attualmente restituisce true per i numeri dispari invece che per i pari.",
-            "Il codice non funziona perché manca una chiamata esplicita al metodo Math.abs() per rendere number positivo prima della verifica"
+            "La variabile booleana result dovrebbe essere inizializzata a true, e impostata a false se si trova un valore negativo.",
+            "La condizione del for è sbagliata: dovrebbe essere i <= arr.length.",
+            "Il metodo restituisce false per qualsiasi array perché non entra mai nel ramo if."
         ],
-        "correctAnswerIndex": 1,
+        "correctAnswerIndex": 0,
         "macroexercise": "TrovaErrore",
         "difficulty": "intermedio"
     },
