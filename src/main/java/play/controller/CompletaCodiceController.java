@@ -24,6 +24,7 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import play.model.Exercise;
 import play.model.ExerciseModel;
+import play.model.SessionManager;
 
 public class CompletaCodiceController {
 
@@ -44,7 +45,7 @@ public class CompletaCodiceController {
     protected Button finishExerciseButton;
 
     public CompletaCodiceController() {
-        loadExercisesByDifficulty(currentDifficulty);
+
     }
 
     @FXML
@@ -54,6 +55,12 @@ public class CompletaCodiceController {
 
     public void initData(String username) {
         this.username = username;
+
+        // Determina la difficoltà corretta basata sui progressi dell'utente
+        currentDifficulty = DifficultyManager.getCurrentDifficulty("CompletaCodice");
+        System.out.println("Caricando CompletaCodice livello: " + currentDifficulty);
+
+        loadExercisesByDifficulty(currentDifficulty);
         loadExercise(currentExerciseIndex);
     }
 
@@ -107,8 +114,12 @@ public class CompletaCodiceController {
             Parent homeRoot = loader.load();
             Scene homeScene = new Scene(homeRoot);
 
+            // IMPORTANTE: Ottieni il controller della Home e aggiorna i progressi
             HomeController controller = loader.getController();
-            controller.setWelcomeMessage(username);
+            String username = SessionManager.getUsername();
+            if (username != null && !username.trim().isEmpty()) {
+                controller.setWelcomeMessage(username);
+            }
 
             Stage stage = (Stage) exerciseQuestion.getScene().getWindow();
             stage.setScene(homeScene);

@@ -25,6 +25,7 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import play.model.Exercise;
 import play.model.ExerciseModel;
+import play.model.SessionManager;
 
 public class ExerciseController {
 
@@ -53,7 +54,7 @@ public class ExerciseController {
     protected Button finishExerciseButton;
 
     public ExerciseController() {
-        loadExercisesByDifficulty(currentDifficulty);
+
     }
 
     @FXML
@@ -65,11 +66,13 @@ public class ExerciseController {
     }
 
     public void initData(String username) {
-        // Assegna direttamente lo username passato, senza fallback
         this.username = username;
-        // Aggiungi log per debug
-        System.out.println("Username ricevuto: " + username);
-        System.out.println("Numero di esercizi caricati: " + currentExercises.size());
+
+        // Determina la difficoltà corretta basata sui progressi dell'utente
+        currentDifficulty = DifficultyManager.getCurrentDifficulty("TrovaErrore");
+        System.out.println("Caricando TrovaErrore livello: " + currentDifficulty);
+
+        loadExercisesByDifficulty(currentDifficulty);
         loadExercise(currentExerciseIndex);
     }
 
@@ -170,6 +173,13 @@ public class ExerciseController {
             FXMLLoader loader = new FXMLLoader(fxmlLocation);
             Parent homeRoot = loader.load();
             Scene homeScene = new Scene(homeRoot);
+
+            // IMPORTANTE: Ottieni il controller della Home e aggiorna i progressi
+            HomeController controller = loader.getController();
+            String username = SessionManager.getUsername();
+            if (username != null && !username.trim().isEmpty()) {
+                controller.setWelcomeMessage(username);
+            }
 
             Stage stage = (Stage) exerciseQuestion.getScene().getWindow();
             stage.setScene(homeScene);

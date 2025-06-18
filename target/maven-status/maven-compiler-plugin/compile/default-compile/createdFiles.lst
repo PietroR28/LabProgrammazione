@@ -12,11 +12,13 @@ play\model\MacroExercise.class
 play\controller\HomeController.class
 play\model\User.class
 play\controller\OrdinaCodiceController.class
+play\controller\DifficultyManager.class
 play\model\OrdinaCodiceExerciseItem.class
 play\controller\ExerciseController.class
 play\Play.class
 play\controller\OrdinaCodiceController$1.class
 play\model\ExerciseModel.class
+play\controller\HomeController$ExerciseProgress.class
 play\controller\OrdinaCodiceExerciseController.class
 play\model\OrdinaCodiceExercise.class
 play\controller\TrovaErroreExerciseController.class

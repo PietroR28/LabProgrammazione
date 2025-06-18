@@ -63,7 +63,7 @@ public class OrdinaCodiceController {
     protected ListView<String> codeListView;
 
     public OrdinaCodiceController() {
-        loadExercisesByDifficulty(currentDifficulty);
+
     }
 
     @FXML
@@ -165,12 +165,15 @@ public class OrdinaCodiceController {
         if (this.username == null || this.username.trim().isEmpty()) {
             this.username = SessionManager.getUsername();
         }
-        // Controlla ancora una volta
         if (this.username == null || this.username.trim().isEmpty()) {
-            // Default se proprio non c'è username
-            this.username = "user";
+            this.username = "user"; // Default
         }
 
+        // Determina la difficoltà corretta basata sui progressi dell'utente
+        currentDifficulty = DifficultyManager.getCurrentDifficulty("OrdinaCodice");
+        System.out.println("Caricando OrdinaCodice livello: " + currentDifficulty);
+
+        loadExercisesByDifficulty(currentDifficulty);
         loadExercise(currentExerciseIndex);
     }
 
@@ -294,13 +297,12 @@ public class OrdinaCodiceController {
             Parent homeRoot = loader.load();
             Scene homeScene = new Scene(homeRoot);
 
+            // IMPORTANTE: Ottieni il controller della Home e aggiorna i progressi
             HomeController controller = loader.getController();
-            // Usa lo username salvato nella classe o prendilo dal SessionManager
-            String usernameToPass = this.username;
-            if (usernameToPass == null || usernameToPass.trim().isEmpty()) {
-                usernameToPass = SessionManager.getUsername();
+            String username = SessionManager.getUsername();
+            if (username != null && !username.trim().isEmpty()) {
+                controller.setWelcomeMessage(username);
             }
-            controller.setWelcomeMessage(usernameToPass);
 
             Stage stage = (Stage) exerciseQuestion.getScene().getWindow();
             stage.setScene(homeScene);

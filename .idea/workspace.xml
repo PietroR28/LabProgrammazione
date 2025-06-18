@@ -4,7 +4,44 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9750d18a-27b6-4a31-bca9-5ab70ada1d9e" name="Changes" comment="Modificati MVC riguardanti Login e Registrazione" />
+    <list default="true" id="9750d18a-27b6-4a31-bca9-5ab70ada1d9e" name="Changes" comment="piccolo fix">
+      <change afterPath="$PROJECT_DIR$/src/main/java/play/controller/DifficultyManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves.json" beforeDir="false" afterPath="$PROJECT_DIR$/saves.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/play/controller/CompletaCodiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/play/controller/CompletaCodiceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/play/controller/ExerciseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/play/controller/ExerciseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/play/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/play/controller/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/play/controller/MacroExerciseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/play/controller/MacroExerciseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/play/controller/OrdinaCodiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/play/controller/OrdinaCodiceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fxml/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/Home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/Play.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/Play.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/controller/CompletaCodiceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/controller/CompletaCodiceController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/controller/CompletaCodiceExerciseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/controller/CompletaCodiceExerciseController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/controller/ExerciseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/controller/ExerciseController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/controller/HomeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/controller/HomeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/controller/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/controller/MacroExerciseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/controller/MacroExerciseController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/controller/OrdinaCodiceController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/controller/OrdinaCodiceController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/controller/OrdinaCodiceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/controller/OrdinaCodiceController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/controller/OrdinaCodiceExerciseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/controller/OrdinaCodiceExerciseController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/controller/TrovaErroreExerciseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/controller/TrovaErroreExerciseController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/model/CompletaCodiceExercise.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/model/CompletaCodiceExercise.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/model/Exercise.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/model/Exercise.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/model/ExerciseModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/model/ExerciseModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/model/MacroExercise.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/model/MacroExercise.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/model/OrdinaCodiceExercise.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/model/OrdinaCodiceExercise.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/model/OrdinaCodiceExerciseItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/model/OrdinaCodiceExerciseItem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/model/OrdinaCodiceExerciseModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/model/OrdinaCodiceExerciseModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/model/SessionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/model/SessionManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/model/TrovaErroreExercise.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/model/TrovaErroreExercise.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/model/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/model/UserDataManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/model/UserDataManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/play/model/UserDataManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/play/model/UserDataManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,6 +70,10 @@
     &quot;accountId&quot;: &quot;4fe5bd1a-f86d-416f-806c-e557b7937f6b&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+    <option name="showPreview" value="true" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -109,6 +150,7 @@
       <workItem from="1739876043507" duration="1749000" />
       <workItem from="1739877936823" duration="4853000" />
       <workItem from="1747120292363" duration="5594000" />
+      <workItem from="1750243803421" duration="4156000" />
     </task>
     <task id="LOCAL-00001" summary="Modificati MVC riguardanti Login e Registrazione">
       <option name="closed" value="true" />
@@ -126,7 +168,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739882539167</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="piccolo fix">
+      <option name="closed" value="true" />
+      <created>1750242142466</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1750242142466</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,6 +195,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Modificati MVC riguardanti Login e Registrazione" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modificati MVC riguardanti Login e Registrazione" />
+    <MESSAGE value="piccolo fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="piccolo fix" />
   </component>
 </project>

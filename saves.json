@@ -1,7 +1,13 @@
 {
     "Biacco": {
-        "TrovaErrore": {"principiante": {"risultato": "failed"}},
-        "CompletaCodice": {"principiante": {"risultato": "success"}},
+        "TrovaErrore": {
+            "principiante": {"risultato": "success"},
+            "intermedio": {"risultato": "failed"}
+        },
+        "CompletaCodice": {
+            "principiante": {"risultato": "success"},
+            "intermedio": {"risultato": "success"}
+        },
         "OrdinaCodice": {"principiante": {"risultato": "failed"}}
     },
     "prova": {
@@ -11,6 +17,18 @@
         },
         "CompletaCodice": {"principiante": {"risultato": "success"}},
         "OrdinaCodice": {"principiante": {"risultato": "failed"}}
+    },
+    "admin": {
+        "TrovaErrore": {
+            "esperto": {"risultato": "success"},
+            "principiante": {"risultato": "success"},
+            "intermedio": {"risultato": "success"}
+        },
+        "CompletaCodice": {
+            "esperto": {"risultato": "success"},
+            "principiante": {"risultato": "success"},
+            "intermedio": {"risultato": "success"}
+        }
     },
     "Ventu": {"TrovaErrore": {
         "esperto": {"risultato": "success"},
