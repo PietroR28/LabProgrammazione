@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -378,6 +379,18 @@ public class HomeController {
             Stage stage = (Stage) welcomeLabel.getScene().getWindow();
             stage.setScene(scene);
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void handleClassifiche() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Classifiche.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) welcomeLabel.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

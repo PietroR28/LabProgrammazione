@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="play.controller.ClassificheController"
+      spacing="10" alignment="CENTER"
+      prefWidth="800" prefHeight="600" stylesheets="@../styles.css">
+    <Label text="Classifica esercizi completati"/>
+    <ListView fx:id="successList" prefHeight="200" prefWidth="300"/>
+    <Label text="Classifica tempo trascorso a rispondere ai quesiti"/>
+    <ListView fx:id="timeList" prefHeight="200" prefWidth="300"/>
+    <Button text="Torna alla Home" onAction="#handleBack" styleClass="button"/>
+    <Region VBox.vgrow="ALWAYS"/>
+</VBox>

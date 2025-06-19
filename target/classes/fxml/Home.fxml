@@ -37,6 +37,9 @@
         <Label fx:id="statusLabel3" text="Non iniziato" styleClass="status-label"/>
     </VBox>
 
+    <!-- Classifiche button -->
+    <Button text="Classifiche" onAction="#handleClassifiche" styleClass="button" prefWidth="250"/>
+
     <Button text="Logout" onAction="#handleLogout"
             style="-fx-background-color: red; -fx-text-fill: white;"/>
 </VBox>
