@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.TextFlow?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="play.controller.ExerciseController"
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="play.controller.TrovaErroreController"
       alignment="CENTER" spacing="20" stylesheets="@../styles.css" styleClass="vbox"
       prefWidth="800" prefHeight="600">    <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>

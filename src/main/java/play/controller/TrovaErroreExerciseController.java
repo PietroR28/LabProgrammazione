@@ -21,7 +21,7 @@ public class TrovaErroreExerciseController extends MacroExerciseController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TEExercise.fxml"));
             Parent root = loader.load();
-            ExerciseController controller = loader.getController();
+            TrovaErroreController controller = loader.getController();
             // Passa lo username ricevuto (già corretto) al nuovo controller
             controller.initData(username);
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();

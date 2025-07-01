@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import play.model.Exercise;
 import play.model.ExerciseModel;
 
-public class ExerciseController extends BaseExerciseController {
+public class TrovaErroreController extends BaseExerciseController {
 
     private final ExerciseModel exerciseModel = new ExerciseModel();
     

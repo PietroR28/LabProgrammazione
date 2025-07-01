@@ -1,6 +1,6 @@
 package play.model;
 
-public abstract class MacroExercise {
+public abstract class MacroExercise implements IExercise {
     private String title;
     private String description;
     private String example;
@@ -13,8 +13,26 @@ public abstract class MacroExercise {
         this.username = username;
     }
 
-    public String getTitle() { return title; }
-    public String getDescription() { return description; }
-    public String getExample() { return example; }
-    public String getUsername() { return username; }
+    @Override
+    public String getTitle() { 
+        return title; 
+    }
+    
+    @Override
+    public String getDescription() { 
+        return description; 
+    }
+    
+    @Override
+    public String getDifficulty() {
+        return "principiante"; // Default, può essere override nelle sottoclassi
+    }
+    
+    public String getExample() { 
+        return example; 
+    }
+    
+    public String getUsername() { 
+        return username; 
+    }
 }

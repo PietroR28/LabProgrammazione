@@ -46,5 +46,15 @@
       "tempo": 65,
       "risultato": "success"
     }
-  }}
+  }},
+  "user": {
+    "CompletaCodice": {"principiante": {
+      "tempo": 13,
+      "risultato": "success"
+    }},
+    "TrovaErrore": {"principiante": {
+      "tempo": 18,
+      "risultato": "success"
+    }}
+  }
 }
