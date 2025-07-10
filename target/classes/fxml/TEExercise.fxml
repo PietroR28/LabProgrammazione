@@ -1,5 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    File FXML per la schermata dell'esercizio "Trova l'errore".
 
+    Questa interfaccia grafica fornisce:
+    - Visualizzazione della domanda e del codice tramite TextFlow;
+    - Tre RadioButton per la selezione della risposta;
+    - Pulsanti per navigare tra le domande, concludere l'esercizio o uscire;
+    - Visualizzazione del timer in alto.
+
+    Gli elementi sono collegati al controller TrovaErroreController,
+    che si occupa di gestire la logica dell'esercizio, la navigazione e il salvataggio delle risposte.
+-->
+<?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>

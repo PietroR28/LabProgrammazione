@@ -10,11 +10,25 @@ import javafx.stage.Stage;
 import play.model.Exercise;
 import play.model.ExerciseModel;
 
+/**
+ * Controller che si occupa della gestione degli esercizi di tipo "Trova l'errore".
+ *
+ * Questa classe estende la classe astratta BaseExerciseController e implementa
+ * la logica necessaria per:
+ * - Caricare e visualizzare domande e risposte degli esercizi;
+ * - Gestire la selezione delle risposte da parte dell'utente tramite i RadioButton;
+ * - Salvare le risposte date;
+ * - Verificare la correttezza delle risposte fornite;
+ * - Gestire il ritorno alla schermata principale in caso di errori o fine esercizio.
+ *
+ * Utilizza ExerciseModel per recuperare gli esercizi in base alla difficoltà selezionata.
+ */
 public class TrovaErroreController extends BaseExerciseController {
 
+    // Modello per il recupero degli esercizi dal file exercises.json
     private final ExerciseModel exerciseModel = new ExerciseModel();
     
-    // Aggiungiamo un array per salvare l'indice della risposta scelta per ogni domanda (inizialmente -1)
+    // Array che salva l'indice della risposta scelta per ogni domanda (-1 = nessuna risposta)
     private int[] userAnswers;
 
     @FXML
@@ -30,6 +44,7 @@ public class TrovaErroreController extends BaseExerciseController {
     @FXML
     protected Button finishExerciseButton;
 
+    // Inizializzazione del controller, associa i RadioButton allo stesso gruppo
     @FXML
     public void initialize() {
         ToggleGroup group = new ToggleGroup();
@@ -38,20 +53,21 @@ public class TrovaErroreController extends BaseExerciseController {
         answerC.setToggleGroup(group);
     }
 
-    // Implementazione dei metodi astratti richiesti da BaseExerciseController
+    // Restituisce il tipo di esercizio "Trova l'errore"
     @Override
     protected String getExerciseType() {
         return "TrovaErrore";
     }
 
+    // Carica gli esercizi in base alla difficoltà raggiunta
     @Override
     protected void loadExercisesByDifficulty(String difficulty) {
         currentExercises = exerciseModel.getExercisesByDifficulty(difficulty);
     }
 
+    // Inizializza l'array delle risposte utente a -1 (nessuna risposta data)
     @Override
     protected void initializeExerciseSpecificData() {
-        // Inizializziamo l'array con -1 per indicare che nessuna risposta è stata scelta
         if (currentExercises != null) {
             userAnswers = new int[currentExercises.size()];
             for (int i = 0; i < userAnswers.length; i++) {
@@ -60,6 +76,7 @@ public class TrovaErroreController extends BaseExerciseController {
         }
     }
 
+    // Carica la domanda e le risposte dell'esercizio all'indice specificato
     @Override
     protected void loadExercise(int index) {
         // Controlla se la lista è vuota o l'indice è fuori range
@@ -77,7 +94,7 @@ public class TrovaErroreController extends BaseExerciseController {
         Exercise exercise = currentExercises.get(index);
         System.out.println("Loading exercise " + index);
         
-        // Setta la domanda, il codice e le risposte
+        // Imposta la domanda e il codice nell'interfaccia
         exerciseQuestion.getChildren().clear();
         exerciseQuestion.getChildren().add(new Text(exercise.getQuestion()));
         exerciseCode.getChildren().clear();
@@ -86,7 +103,7 @@ public class TrovaErroreController extends BaseExerciseController {
         answerB.setText(exercise.getAnswers()[1]);
         answerC.setText(exercise.getAnswers()[2]);
 
-        // Deseleziona i RadioButton
+        // Deseleziona tutti i RadioButton
         answerA.setSelected(false);
         answerB.setSelected(false);
         answerC.setSelected(false);
@@ -114,6 +131,7 @@ public class TrovaErroreController extends BaseExerciseController {
         }
     }
 
+    // Salva la risposta selezionata dall'utente per la domanda corrente
     @Override
     protected void saveCurrentAnswer() {
         if (userAnswers == null) return;
@@ -129,6 +147,7 @@ public class TrovaErroreController extends BaseExerciseController {
         userAnswers[currentExerciseIndex] = selectedAnswerIndex;
     }
 
+    // Verifica se tutte le risposte date sono corrette
     @Override
     protected boolean checkAllAnswers() {
         if (userAnswers == null || currentExercises == null) return false;
@@ -142,6 +161,7 @@ public class TrovaErroreController extends BaseExerciseController {
         return true;
     }
 
+    // Restituisce lo Stage corrente (finestra attiva)
     @Override
     protected Stage getStage() {
         return (Stage) exerciseQuestion.getScene().getWindow();

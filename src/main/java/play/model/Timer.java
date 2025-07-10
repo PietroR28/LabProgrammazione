@@ -7,45 +7,51 @@ import javafx.scene.control.Label;
 import javafx.util.Duration;
 
 /**
- * Manages a timer for exercise sessions.
+ * Classe che gestisce un timer per le sessioni di esercizio.
+ *
+ * Questa classe fornisce:
+ * - Avvio e arresto di un timer
+ * - Calcolo del tempo trascorso in secondi dall'avvio;
+ * - Visualizzazione del tempo trascorso in formato mm:ss;
+ * - Metodi per ottenere il tempo trascorso e per aggiornare la visualizzazione.
+ *
+ * Utilizza Timeline di JavaFX per aggiornare periodicamente la Label associata.
  */
 public class Timer {
-    private long startTime;
-    private long elapsedTime;
-    private Timeline timeline;
-    private Label timerLabel;
+    private long startTime; // Tempo di inizio in millisecondi
+    private long elapsedTime; // Tempo trascorso in secondi
+    private Timeline timeline;// Timeline JavaFX per aggiornare il timer ogni secondo
+    private Label timerLabel; // Label su cui viene visualizzato il timer
     
-    /**
-     * Initializes a timer that displays time in the specified label.
-     * 
-     * @param timerLabel The label to display the timer in
-     */
+    //Costruttore che inizializza il timer e associa la Label su cui mostrare il tempo.
     public Timer(Label timerLabel) {
         this.timerLabel = timerLabel;
         elapsedTime = 0;
     }
     
     /**
-     * Starts the timer.
+     * Avvia il timer.
+     * Imposta il tempo di inizio e crea una Timeline che aggiorna la label ogni secondo.
      */
     public void startTimer() {
         startTime = System.currentTimeMillis();
         
-        // Update timer every second
+        // Aggiorna il timer ogni secondo
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             long currentTime = System.currentTimeMillis();
             elapsedTime = (currentTime - startTime) / 1000;
             updateTimerLabel();
         }));
         
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
+        timeline.setCycleCount(Animation.INDEFINITE); // Ripeti all'infinito
+        timeline.play(); // Avvia la Timeline
         
-        updateTimerLabel();
+        updateTimerLabel(); // Aggiorna subito la label
     }
     
     /**
-     * Stops the timer.
+     * Ferma il timer.
+     * Se la Timeline esiste, la interrompe.
      */
     public void stopTimer() {
         if (timeline != null) {
@@ -53,18 +59,12 @@ public class Timer {
         }
     }
     
-    /**
-     * Returns the elapsed time in seconds.
-     * 
-     * @return elapsed time in seconds
-     */
+    //Restituisce il tempo trascorso in secondi.
     public long getElapsedTimeInSeconds() {
         return elapsedTime;
     }
     
-    /**
-     * Updates the timer label with formatted time.
-     */
+    //Aggiorna la label del timer con il tempo formattato (mm:ss).
     private void updateTimerLabel() {
         long minutes = elapsedTime / 60;
         long seconds = elapsedTime % 60;

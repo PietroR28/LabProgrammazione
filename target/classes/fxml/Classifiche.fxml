@@ -1,3 +1,14 @@
+<!--
+    File FXML per la schermata delle classifiche dell'applicazione.
+
+    Questa interfaccia grafica fornisce:
+    - Visualizzazione delle due classifiche tramite ListView;
+    - Un pulsante per tornare alla schermata Home;
+
+    Gli elementi sono collegati al controller ClassificheController,
+    che si occupa di popolare le liste e gestire la navigazione.
+-->
+
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.VBox?>

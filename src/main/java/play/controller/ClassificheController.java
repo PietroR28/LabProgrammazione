@@ -11,21 +11,33 @@ import play.model.SessionManager;
 
 import java.io.IOException;
 
+/**
+ * Controller che si occupa di gestire la schermata delle classifiche.
+ * 
+ * Questa classe si occupa di popolare e visualizzare le classifiche degli utenti 
+ * in base a:
+ * - Numero di esercizi completati;
+ * - Tempo totale impiegato a svolgere esercizi.
+ */
 public class ClassificheController {
+    // Riferimenti alle ListView definite in FXML
     @FXML private ListView<String> successList;
     @FXML private ListView<String> timeList;
 
     @FXML
     public void initialize() {
-        // Rende le liste non selezionabili
+        // Rende le liste non selezionabili e non focalizzabili (solo visualizzazione)
         successList.setMouseTransparent(true);
         successList.setFocusTraversable(false);
         timeList.setMouseTransparent(true);
         timeList.setFocusTraversable(false);
 
+        // Popola la classifica dei successi
         Classifiche.getSuccessRanking().forEach(item ->
             successList.getItems().add(item.username + " - " + item.successCount + " set di esercizi completati")
         );
+
+        // Popola la classifica dei tempi, formattando il tempo in minuti:secondi
         Classifiche.getTimeRanking().forEach(item -> {
             long totalSeconds = item.totalTime;
             long minutes = totalSeconds / 60;
@@ -35,13 +47,13 @@ public class ClassificheController {
         });
     }
 
+    // Gestisce il ritorno alla Home quando si preme il pulsante "Torna alla Home"
     @FXML
     protected void handleBack() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Home.fxml"));
             Parent root = loader.load();
 
-            // Ottieni il controller della Home e aggiorna i dati dell'utente
             HomeController controller = loader.getController();
             String username = SessionManager.getUsername();
             if (username != null && !username.trim().isEmpty()) {

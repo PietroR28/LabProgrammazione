@@ -1,5 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    File FXML per la schermata introduttiva dell'esercizio "Trova l'errore".
 
+    Questa interfaccia grafica implementa:
+    - Visualizzazione del titolo, della descrizione e dell'esempio di codice dell'esercizio;
+    - Due pulsanti: uno per accedere all'esercizio vero e proprio e uno per tornare alla Home;
+
+    Gli elementi sono collegati al controller TrovaErroreExerciseController,
+    che si occupa di gestire la logica di navigazione e di inizializzazione dei dati.
+-->
+
+<?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>

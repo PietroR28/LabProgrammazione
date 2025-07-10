@@ -13,7 +13,18 @@ import javafx.stage.Stage;
 import play.model.MacroExercise;
 import play.model.SessionManager;
 
+/**
+ * Controller di base per la gestione delle schermate introduttive degli esercizi.
+ *
+ * Questa classe fornisce:
+ * - Metodi per inizializzare e visualizzare titolo, descrizione ed esempio dell'esercizio;
+ * - Funzionalità di ritorno alla schermata Home, assicurando che il contesto utente
+ *   venga mantenuto correttamente;
+ * - Metodi riutilizzabili per la navigazione tra schermate, pensati per essere estesi da controller specifici.
+ */
+
 public class MacroExerciseController {
+    // Collegamenti agli elementi dell'interfaccia grafica tramite FXML
     @FXML
     private Label exerciseTitle;
     @FXML
@@ -21,18 +32,24 @@ public class MacroExerciseController {
     @FXML
     private WebView exerciseExample;
 
+    // Riferimento all'esercizio macro attualmente visualizzato
     private MacroExercise currentExercise;
 
+    /**
+     * Inizializza la schermata con i dati dell'esercizio macro fornito.
+     * Imposta titolo, descrizione e esempio (in HTML) nei rispettivi componenti grafici.
+     */
     public void initExercise(MacroExercise exercise) {
         this.currentExercise = exercise;
         exerciseTitle.setText(exercise.getTitle());
         exerciseDescription.setText(exercise.getDescription());
 
-        // Set HTML content in WebView
+        // Imposta il contenuto HTML nell'area WebView per mostrare l'esempio
         String exampleText = exercise.getExample();
         exerciseExample.getEngine().loadContent("<html><body>" + exampleText + "</body></html>");
     }
 
+    // Metodo di utilità per tornare alla schermata Home.
     protected void redirectToHome() {
         try {
             URL fxmlLocation = getClass().getResource("/fxml/Home.fxml");
@@ -40,7 +57,7 @@ public class MacroExerciseController {
             Parent homeRoot = loader.load();
             Scene homeScene = new Scene(homeRoot);
 
-            // IMPORTANTE: Ottieni il controller della Home e aggiorna i progressi
+            // Ottiene il controller della Home e aggiorna i progressi dell'utente
             HomeController controller = loader.getController();
             String username = SessionManager.getUsername();
             if (username != null && !username.trim().isEmpty()) {
@@ -54,13 +71,14 @@ public class MacroExerciseController {
         }
     }
 
+    // Gestisce il click sul pulsante "Torna alla Home".
     @FXML
     public void handleBack() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Home.fxml"));
             Scene scene = new Scene(loader.load());
 
-            // IMPORTANTE: Ottieni il controller della Home e aggiorna i progressi
+            // Ottiene il controller della Home e aggiorna i progressi dell'utente
             HomeController homeController = loader.getController();
             String username = SessionManager.getUsername();
             if (username != null && !username.trim().isEmpty()) {
