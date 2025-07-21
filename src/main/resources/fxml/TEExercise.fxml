@@ -1,3 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.TextFlow?>
+
 <!--
     File FXML per la schermata dell'esercizio "Trova l'errore".
 
@@ -10,11 +17,6 @@
     Gli elementi sono collegati al controller TrovaErroreController,
     che si occupa di gestire la logica dell'esercizio, la navigazione e il salvataggio delle risposte.
 -->
-<?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.TextFlow?>
 
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="play.controller.TrovaErroreController"
       alignment="CENTER" spacing="20" stylesheets="@../styles.css" styleClass="vbox"

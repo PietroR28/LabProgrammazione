@@ -28,10 +28,16 @@
         "risultato": "success"
       }
     },
-    "CompletaCodice": {"principiante": {
-      "tempo": 8,
-      "risultato": "success"
-    }}
+    "CompletaCodice": {
+      "principiante": {
+        "tempo": 8,
+        "risultato": "success"
+      },
+      "intermedio": {
+        "tempo": 2,
+        "risultato": "failed"
+      }
+    }
   },
   "Ventu": {"TrovaErrore": {
     "esperto": {

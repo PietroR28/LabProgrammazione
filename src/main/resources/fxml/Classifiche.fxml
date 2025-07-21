@@ -1,3 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
+
 <!--
     File FXML per la schermata delle classifiche dell'applicazione.
 
@@ -9,10 +15,6 @@
     che si occupa di popolare le liste e gestire la navigazione.
 -->
 
-<?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.Region?>
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
       fx:controller="play.controller.ClassificheController"
       spacing="10" alignment="CENTER"
