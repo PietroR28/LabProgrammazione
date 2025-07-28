@@ -21,24 +21,28 @@ import javafx.scene.paint.Color;
 import play.model.Exercise;
 import play.model.OrdinaCodiceExerciseModel;
 
+/**
+ * Controller per gli esercizi di ordinamento codice.
+ * Permette all'utente di trascinare righe di codice per ordinarle correttamente.
+ */
 public class OrdinaCodiceController extends BaseExerciseController {
 
     private final OrdinaCodiceExerciseModel exerciseModel = new OrdinaCodiceExerciseModel();
-    
-    // Lista che memorizza l'ordinamento corrente creato dall'utente
+
+    // Lista che tiene traccia dell'ordine corrente creato dall'utente (molto importante!)
     private List<Integer> currentUserOrder = new ArrayList<>();
 
     @FXML
     private VBox codeContainer;
-    
-    // Aggiunti per compatibilità con BaseExerciseController
+
     @FXML
     protected javafx.scene.control.Label exerciseQuestion;
     @FXML
     protected javafx.scene.control.Button finishExerciseButton;
     @FXML
     protected javafx.scene.control.Label resultLabel;
-    
+
+    // La lista visibile dove l'utente trascina le righe di codice
     private ListView<String> codeListView;
 
     public OrdinaCodiceController() {
@@ -52,30 +56,26 @@ public class OrdinaCodiceController extends BaseExerciseController {
 
     @Override
     protected void loadExercisesByDifficulty(String difficulty) {
+        // Carica tutti gli esercizi di ordinamento per la difficoltà scelta
         List<Exercise> exercises = exerciseModel.getOrdinaCodiceExercisesByDifficulty(difficulty);
         currentExercises = new ArrayList<>(exercises);
     }
 
     @Override
     protected void initializeExerciseSpecificData() {
+        // Crea la lista dove l'utente trascinerà le righe di codice
         setupCodeListView();
     }
 
     @Override
     protected boolean checkAllAnswers() {
-        // Verifica i risultati di tutti gli esercizi
-        for (int i = 0; i < currentExercises.size(); i++) {
-            if (!checkSingleExerciseResult(i)) {
-                return false;
-            }
-        }
-        return true;
+        // Verifica se l'utente ha ordinato correttamente le righe
+        return checkCurrentExerciseResult();
     }
 
     @Override
     protected void saveCurrentAnswer() {
-        // L'ordinamento corrente è già salvato in currentUserOrder
-        // Non c'è bisogno di fare nulla di specifico qui per OrdinaCodice
+        // L'ordinamento è già salvato automaticamente in currentUserOrder
     }
 
     @Override
@@ -87,53 +87,48 @@ public class OrdinaCodiceController extends BaseExerciseController {
     protected void loadExercise(int index) {
         if (index < 0 || index >= currentExercises.size()) return;
 
-        Exercise exercise = currentExercises.get(index); // Cast necessario per accedere ai metodi specifici
-
-        // Imposta la domanda
+        Exercise exercise = currentExercises.get(index);
         exerciseQuestion.setText(exercise.getQuestion());
 
-        // Ottieni il codice e l'ordine corretto
+        // Dividi il codice in singole righe
         String[] codeLines = exercise.getCode().split("\n");
 
-        // Crea un array con le righe in ordine casuale per la presentazione
+        // Crea un ordine iniziale mescolato per confondere l'utente
         List<Integer> initialOrder = new ArrayList<>();
         for (int i = 0; i < codeLines.length; i++) {
             initialOrder.add(i);
         }
-        // Mescola l'ordine
-        Collections.shuffle(initialOrder);
+        Collections.shuffle(initialOrder); // Mescola le righe!
 
-        // Memorizza l'ordine attuale dell'utente
+        // Salva l'ordine mescolato come punto di partenza dell'utente
         currentUserOrder.clear();
         for (Integer i : initialOrder) {
             currentUserOrder.add(i);
         }
 
-        // Popola la ListView con le righe di codice nell'ordine mescolato
+        // Mostra le righe di codice nell'ordine mescolato
         ObservableList<String> items = FXCollections.observableArrayList();
         for (int i : initialOrder) {
             items.add(codeLines[i]);
         }
         codeListView.setItems(items);
 
-        // Mostra il pulsante "Concludi Esercizio" solo se è l'ultimo esercizio
         finishExerciseButton.setVisible(index == currentExercises.size() - 1);
-
-        // Nascondi il label del risultato quando si carica un nuovo esercizio
         resultLabel.setVisible(false);
     }
 
+    /**
+     * Crea la lista dove l'utente può trascinare le righe di codice per riordinarle
+     */
     private void setupCodeListView() {
-        // Inizializza la ListView per il codice
         codeListView = new ListView<>();
         codeListView.getStyleClass().add("code-area");
         codeListView.setStyle("-fx-font-family: 'Consolas', 'Monaco', monospace; -fx-font-size: 14px;");
         codeListView.setPrefHeight(300);
 
-        // Aggiungi la ListView al container
         codeContainer.getChildren().add(codeListView);
 
-        // Configura la visualizzazione delle celle
+        // Configura ogni riga per essere trascinabile
         codeListView.setCellFactory(lv -> {
             ListCell<String> cell = new ListCell<String>() {
                 @Override
@@ -144,6 +139,7 @@ public class OrdinaCodiceController extends BaseExerciseController {
                         setBackground(null);
                     } else {
                         setText(item);
+                        // Colori alternati per le righe (zebra striping)
                         setBackground(new Background(new BackgroundFill(
                                 getIndex() % 2 == 0 ? Color.web("#f8f9fa") : Color.web("#e9ecef"),
                                 CornerRadii.EMPTY,
@@ -152,17 +148,18 @@ public class OrdinaCodiceController extends BaseExerciseController {
                 }
             };
 
-            // Configura drag and drop
+            // DRAG AND DROP - Quando l'utente inizia a trascinare una riga
             cell.setOnDragDetected(event -> {
                 if (!cell.isEmpty()) {
                     Dragboard db = cell.startDragAndDrop(TransferMode.MOVE);
                     ClipboardContent content = new ClipboardContent();
-                    content.putString(String.valueOf(cell.getIndex()));
+                    content.putString(String.valueOf(cell.getIndex())); // Salva quale riga sta trascinando
                     db.setContent(content);
                     event.consume();
                 }
             });
 
+            // Permette di rilasciare su questa cella
             cell.setOnDragOver(event -> {
                 if (event.getGestureSource() != cell && event.getDragboard().hasString()) {
                     event.acceptTransferModes(TransferMode.MOVE);
@@ -170,6 +167,7 @@ public class OrdinaCodiceController extends BaseExerciseController {
                 event.consume();
             });
 
+            // Evidenzia la cella quando ci passi sopra trascinando
             cell.setOnDragEntered(event -> {
                 if (event.getGestureSource() != cell && event.getDragboard().hasString()) {
                     cell.setBackground(new Background(new BackgroundFill(
@@ -178,6 +176,7 @@ public class OrdinaCodiceController extends BaseExerciseController {
                 event.consume();
             });
 
+            // Rimuove l'evidenziazione quando esci dalla cella
             cell.setOnDragExited(event -> {
                 cell.setBackground(new Background(new BackgroundFill(
                         cell.getIndex() % 2 == 0 ? Color.web("#f8f9fa") : Color.web("#e9ecef"),
@@ -186,20 +185,23 @@ public class OrdinaCodiceController extends BaseExerciseController {
                 event.consume();
             });
 
+            // PARTE CRUCIALE - Quando l'utente rilascia una riga trascinata
             cell.setOnDragDropped(event -> {
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasString()) {
-                    int draggedIdx = Integer.parseInt(db.getString());
-                    int targetIdx = cell.getIndex();
+                    int draggedIdx = Integer.parseInt(db.getString()); // Quale riga era trascinata
+                    int targetIdx = cell.getIndex(); // Dove è stata rilasciata
 
                     if (draggedIdx != targetIdx) {
+                        // Sposta la riga nella vista
                         ObservableList<String> items = codeListView.getItems();
                         String draggedItem = items.get(draggedIdx);
                         items.remove(draggedIdx);
                         items.add(targetIdx, draggedItem);
 
-                        // Aggiorna l'ordinamento dell'utente
+                        // IMPORTANTISSIMO: Aggiorna anche l'ordine dell'utente!
+                        // Senza questo, il controllo finale fallirebbe sempre
                         int movedItem = currentUserOrder.get(draggedIdx);
                         currentUserOrder.remove(draggedIdx);
                         currentUserOrder.add(targetIdx, movedItem);
@@ -214,48 +216,52 @@ public class OrdinaCodiceController extends BaseExerciseController {
         });
     }
 
-    private boolean checkSingleExerciseResult(int exerciseIndex) {
-        Exercise exercise = currentExercises.get(exerciseIndex);
-        int[] correctOrder = exercise.getCorrectOrder();
+    /**
+     * Verifica se l'utente ha ordinato correttamente le righe di codice.
+     * Confronta l'ordine corrente dell'utente con quello corretto dal JSON.
+     */
+    private boolean checkCurrentExerciseResult() {
+        if (currentExerciseIndex < 0 || currentExerciseIndex >= currentExercises.size()) {
+            return false;
+        }
 
-        // Salva l'esercizio corrente e carica quello da verificare
-        int savedIndex = currentExerciseIndex;
-        currentExerciseIndex = exerciseIndex;
-        loadExercise(exerciseIndex);
+        Exercise exercise = currentExercises.get(currentExerciseIndex);
+        int[] correctOrder = exercise.getCorrectOrder(); // Ordine corretto dal JSON
 
-        // Confronta l'ordine dell'utente con l'ordine corretto
-        boolean isCorrect = true;
+        // Verifica che abbiano la stessa lunghezza
         if (correctOrder.length != currentUserOrder.size()) {
-            isCorrect = false;
-        } else {
-            for (int i = 0; i < correctOrder.length; i++) {
-                if (correctOrder[i] != currentUserOrder.get(i)) {
-                    isCorrect = false;
-                    break;
-                }
+            System.out.println("DEBUG: Lunghezze diverse - Corretto: " + correctOrder.length + ", Utente: " + currentUserOrder.size());
+            return false;
+        }
+
+        // Controlla ogni posizione: deve essere identica
+        for (int i = 0; i < correctOrder.length; i++) {
+            if (correctOrder[i] != currentUserOrder.get(i)) {
+                System.out.println("DEBUG: Differenza alla posizione " + i + " - Corretto: " + correctOrder[i] + ", Utente: " + currentUserOrder.get(i));
+                return false;
             }
         }
 
-        // Ripristina l'esercizio corrente
-        currentExerciseIndex = savedIndex;
-        return isCorrect;
+        System.out.println("DEBUG: Ordine corretto! Utente: " + currentUserOrder + ", Corretto: " + java.util.Arrays.toString(correctOrder));
+        return true;
     }
 
+    // Pulsanti per spostare su/giù (alternativa al drag&drop)
     @FXML
     protected void handleMoveUp() {
         int selectedIndex = codeListView.getSelectionModel().getSelectedIndex();
         if (selectedIndex > 0) {
+            // Sposta nella vista
             ObservableList<String> items = codeListView.getItems();
             String selectedItem = items.get(selectedIndex);
             items.remove(selectedIndex);
             items.add(selectedIndex - 1, selectedItem);
 
-            // Aggiorna l'ordine dell'utente
+            // Sposta anche nell'ordine dell'utente
             int movedItem = currentUserOrder.get(selectedIndex);
             currentUserOrder.remove(selectedIndex);
             currentUserOrder.add(selectedIndex - 1, movedItem);
 
-            // Seleziona di nuovo la riga spostata
             codeListView.getSelectionModel().select(selectedIndex - 1);
         }
     }
@@ -265,16 +271,16 @@ public class OrdinaCodiceController extends BaseExerciseController {
         int selectedIndex = codeListView.getSelectionModel().getSelectedIndex();
         ObservableList<String> items = codeListView.getItems();
         if (selectedIndex >= 0 && selectedIndex < items.size() - 1) {
+            // Sposta nella vista
             String selectedItem = items.get(selectedIndex);
             items.remove(selectedIndex);
             items.add(selectedIndex + 1, selectedItem);
 
-            // Aggiorna l'ordine dell'utente
+            // Sposta anche nell'ordine dell'utente
             int movedItem = currentUserOrder.get(selectedIndex);
             currentUserOrder.remove(selectedIndex);
             currentUserOrder.add(selectedIndex + 1, movedItem);
 
-            // Seleziona di nuovo la riga spostata
             codeListView.getSelectionModel().select(selectedIndex + 1);
         }
     }
