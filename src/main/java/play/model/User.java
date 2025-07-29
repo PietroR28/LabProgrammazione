@@ -13,7 +13,6 @@ public class User {
         this.password = password;
     }
 
-    // Getters e setters
     public String getFirstName() {
         return firstName;
     }

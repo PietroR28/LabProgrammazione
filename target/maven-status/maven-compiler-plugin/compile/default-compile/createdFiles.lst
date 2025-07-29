@@ -20,6 +20,7 @@ play\controller\OrdinaCodiceController.class
 play\controller\ClassificheController.class
 play\controller\DifficultyManager.class
 play\model\OrdinaCodiceExerciseItem.class
+play\controller\ExerciseController.class
 play\model\Classifiche.class
 play\Play.class
 play\controller\OrdinaCodiceController$1.class

@@ -15,6 +15,16 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import play.model.UserDataManager;
 
+/**
+ * Controller per la schermata di login dell'applicazione.
+ *
+ * Questa classe si occupa di:
+ * - Gestire l'autenticazione dell'utente;
+ * - Gestire la creazione di un nuovo utente;
+ * - Mostrare messaggi di stato e feedback;
+ * - Gestire la navigazione tra il form di login e quello di registrazione.
+ */
+
 public class LoginController {
 
     @FXML
@@ -33,11 +43,20 @@ public class LoginController {
     @FXML
     private PasswordField newPasswordField;
 
+    /** Form di login (GridPane) */
     @FXML
-    private GridPane loginForm; // Form di login
-    @FXML
-    private GridPane createUserForm; // Form di creazione nuovo utente
+    private GridPane loginForm;
 
+    /** Form di creazione nuovo utente (GridPane) */
+    @FXML
+    private GridPane createUserForm;
+
+
+    /**
+     * Gestisce il login dell'utente.
+     * Verifica le credenziali e, se corrette, carica la schermata Home.
+     * In caso di errore mostra un messaggio di stato.
+     */
     @FXML
     public void handleLogin() {
         String user = usernameField.getText();
@@ -62,6 +81,11 @@ public class LoginController {
         }
     }
 
+
+    /**
+     * Gestisce il click sul pulsante "Crea nuovo utente".
+     * Nasconde il form di login e mostra il form di registrazione.
+     */
     @FXML
     public void handleCreateUser() {
         // Nascondi il form di login
@@ -71,6 +95,11 @@ public class LoginController {
         createUserForm.setVisible(true);
     }
 
+
+    /**
+     * Gestisce il salvataggio di un nuovo utente.
+     * Valida i campi, salva l'utente tramite UserDataManager e mostra messaggi di feedback.
+     */
     @FXML
     public void handleSaveUser() {
         String firstName = firstNameField.getText();
@@ -83,24 +112,34 @@ public class LoginController {
             return;
         }
 
-        // Salva il nuovo utente, ad esempio chiamando un metodo di UserDataManager
         if (UserDataManager.saveNewUser(firstName, lastName, username, password)) {
             showStatusMessage("Nuovo utente creato con successo!", "green");
-            // Puoi anche tornare alla schermata di login se vuoi
-            createUserForm.setVisible(false); // Nascondi il form di creazione
-            loginForm.setVisible(true); // Mostra di nuovo il form di login
+
+            createUserForm.setVisible(false);
+            loginForm.setVisible(true);
         } else {
             showStatusMessage("Errore durante la creazione del nuovo utente.", "red");
         }
     }
 
+
+    /**
+     * Gestisce il click sul pulsante "Annulla" nella schermata di registrazione.
+     * Torna al form di login nascondendo quello di creazione utente.
+     */
     @FXML
     public void handleCancelCreateUser() {
-        // Nascondi il form di creazione e mostra il form di login
         createUserForm.setVisible(false);
-        loginForm.setVisible(true); // Mostra di nuovo il form di login
+        loginForm.setVisible(true);
     }
 
+
+    /**
+     * Mostra un messaggio di stato temporaneo nella label di stato.
+     * Il messaggio scompare automaticamente dopo alcuni secondi.
+     * @param message Il testo da mostrare
+     * @param color Il colore del testo (es: "red", "green")
+     */
     private void showStatusMessage(String message, String color) {
         statusLabel.setText(message);
         statusLabel.setStyle("-fx-text-fill: " + color + "; -fx-background-color: white; -fx-padding: 10px; -fx-border-radius: 5px; -fx-background-radius: 5px; -fx-border-color: black; -fx-border-width: 1px;");

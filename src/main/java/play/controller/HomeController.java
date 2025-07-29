@@ -23,6 +23,16 @@ import play.model.SessionManager;
 import play.model.TrovaErroreExercise;
 import play.model.User;
 
+/**
+ * Controller per la schermata principale (Home) dell'applicazione.
+ *
+ * Questa classe si occupa di:
+ * - Gestire la visualizzazione del messaggio di benvenuto e il salvataggio dello username;
+ * - Calcolare e aggiornare le barre di progresso e le label di stato per ciascun esercizio;
+ * - Caricare i dati di salvataggio degli esercizi da file JSON;
+ * - Gestire la navigazione verso le schermate degli esercizi e delle classifiche;
+ * - Gestire il logout dell'utente.
+ */
 public class HomeController {
     @FXML private Label welcomeLabel;
     @FXML private ProgressBar progressBar1; // Progress bar per "Trova l'errore"
@@ -66,7 +76,7 @@ public class HomeController {
 
     public void setWelcomeMessage(String username) {
         welcomeLabel.setText("Ciao " + username + "!");
-        // Salva lo username in SessionManager per renderlo persistente
+        // Salva lo username in SessionManager
         SessionManager.setUsername(username);
 
         // Carica e aggiorna i progressi degli esercizi
@@ -152,10 +162,10 @@ public class HomeController {
         if (file.exists()) {
             try {
                 String content = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
-                // Rimuovi eventuali caratteri di controllo o spazi extra
+                // Rimuove eventuali caratteri di controllo o spazi extra
                 content = content.trim();
                 
-                // Se il file è vuoto o contiene solo "{}", restituisci un oggetto vuoto
+                // Se il file è vuoto o contiene solo "{}", restituisce un oggetto vuoto
                 if (content.isEmpty() || content.equals("{}")) {
                     return new JSONObject();
                 }
@@ -211,12 +221,12 @@ public class HomeController {
                     completedLevels++;
                     highestLevelCompleted = difficulty;
                 } else {
-                    // Se un livello non è completato, fermiamo il conteggio
+                    // Se un livello non è completato, ferma il conteggio
                     // perché i livelli devono essere completati in ordine
                     break;
                 }
             } else {
-                // Se un livello non esiste nei dati, fermiamo il conteggio
+                // Se un livello non esiste nei dati, ferma il conteggio
                 break;
             }
         }
@@ -244,12 +254,14 @@ public class HomeController {
                 statusText = "Stato sconosciuto";
         }
 
-        // Debug output
-        System.out.println("DEBUG - " + exerciseName + ": " + completedLevels + " livelli completati. Ultimo: " + highestLevelCompleted);
-
+        // Determina il testo da mostrare in base al livello completato
         return new ExerciseProgress(progressValue, statusText, "", completedLevels);
     }
 
+    /**
+     * Carica un esercizio specifico e lo visualizza nella scena corrente.
+     * @param exercise L'esercizio da caricare
+     */
     private void loadExercise(MacroExercise exercise) {
         try {
             FXMLLoader loader;
@@ -284,9 +296,11 @@ public class HomeController {
         }
     }
 
+    /**
+     * Ogni handler prende in input l'utente e carica l'esempio dell'esercizio corrispondente.
+     */
     @FXML
     public void handleExercise1() {
-        // Recupera lo username dal SessionManager
         String username = SessionManager.getUsername();
         MacroExercise exercise = new TrovaErroreExercise(
                 "Esercizio 1 - Trova l'errore",
@@ -369,6 +383,10 @@ public class HomeController {
         loadExercise(exercise);
     }
 
+    /**
+     * Gestisce il click sul pulsante di logout.
+     * Ripristina lo stato dell'utente e torna alla schermata di login.
+     */
     @FXML
     public void handleLogout() {
         // Reset dello username in SessionManager
@@ -383,6 +401,10 @@ public class HomeController {
         }
     }
 
+    /**
+     * Gestisce il click sul pulsante per visualizzare le classifiche.
+     * Carica la schermata delle classifiche.
+     */
     @FXML
     public void handleClassifiche() {
         try {

@@ -10,17 +10,39 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+/**
+ * Classe che gestisce il caricamento e la gestione degli esercizi dal file exercises.json.
+ *
+ * Questa classe si occupa di:
+ * - Caricare gli esercizi dal file JSON;
+ * - Gestire due liste distinte di esercizi (normali e "Completa il codice");
+ * - Fornire metodi per filtrare gli esercizi per difficoltà;
+ * - Restituire esercizi specifici o il numero totale di esercizi.
+ */
+
 public class ExerciseModel {
     private List<Exercise> exercises;
     private List<Exercise> completaCodiceExercises;
+
+    // Percorso del file JSON degli esercizi
     private static final String EXERCISES_FILE_PATH = "exercises.json";
 
+
+    /**
+     * Costruttore della classe ExerciseModel.
+     * Inizializza le liste e carica gli esercizi dal file JSON.
+     */
     public ExerciseModel() {
         exercises = new ArrayList<>();
         completaCodiceExercises = new ArrayList<>();
         loadExercises();
     }
 
+
+    /**
+     * Carica gli esercizi dal file JSON e li suddivide nelle rispettive liste.
+     * Gestisce sia esercizi "Trova l'errore" che "Completa il codice".
+     */
     private void loadExercises() {
         try {
             File exerciseFile = new File(EXERCISES_FILE_PATH);
@@ -53,6 +75,11 @@ public class ExerciseModel {
         }
     }
     
+
+    /**
+     * Carica un esercizio di tipo "Trova l'errore" da un oggetto JSON e lo aggiunge alla lista.
+     * @param jsonObject Oggetto JSON contenente i dati dell'esercizio
+     */
     private void loadTrovaErroreExercise(JSONObject jsonObject) {
         String question = jsonObject.optString("question", "");
         String code = jsonObject.optString("code", "");
@@ -68,6 +95,11 @@ public class ExerciseModel {
         exercises.add(new Exercise(question, code, answers, correctAnswerIndex, difficulty));
     }
     
+
+    /**
+     * Carica un esercizio di tipo "Completa il codice" da un oggetto JSON e lo aggiunge alla lista.
+     * @param jsonObject Oggetto JSON contenente i dati dell'esercizio
+     */
     private void loadCompletaCodiceExercise(JSONObject jsonObject) {
         String question = jsonObject.optString("question", "");
         String code = jsonObject.optString("code", "");
@@ -79,6 +111,12 @@ public class ExerciseModel {
         completaCodiceExercises.add(new Exercise(question, code, answers, correctAnswerIndex, difficulty));
     }
 
+
+    /**
+     * Restituisce la lista degli esercizi "Trova l'errore" filtrati per difficoltà.
+     * @param difficulty La difficoltà da filtrare
+     * @return Lista di esercizi filtrati
+     */
     public List<Exercise> getExercisesByDifficulty(String difficulty) {
         List<Exercise> filteredExercises = new ArrayList<>();
         for (Exercise exercise : exercises) {
@@ -89,6 +127,12 @@ public class ExerciseModel {
         return filteredExercises;
     }
     
+
+    /**
+     * Restituisce la lista degli esercizi "Completa il codice" filtrati per difficoltà.
+     * @param difficulty La difficoltà da filtrare
+     * @return Lista di esercizi filtrati
+     */
     public List<Exercise> getCompletaCodiceExercisesByDifficulty(String difficulty) {
         List<Exercise> filteredExercises = new ArrayList<>();
         for (Exercise exercise : completaCodiceExercises) {
@@ -99,6 +143,12 @@ public class ExerciseModel {
         return filteredExercises;
     }
 
+
+    /**
+     * Restituisce un esercizio dalla lista "Trova l'errore" dato l'indice.
+     * @param index L'indice dell'esercizio
+     * @return L'esercizio corrispondente o null se l'indice non è valido
+     */
     public Exercise getExercise(int index) {
         if (index >= 0 && index < exercises.size()) {
             return exercises.get(index);
@@ -106,6 +156,11 @@ public class ExerciseModel {
         return null;
     }
 
+
+    /**
+     * Restituisce il numero totale di esercizi "Trova l'errore" caricati.
+     * @return Numero di esercizi
+     */
     public int getTotalExercises() {
         return exercises.size();
     }
