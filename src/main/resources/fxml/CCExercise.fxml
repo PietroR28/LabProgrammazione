@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- 
+     Interfaccia di esecuzione per esercizi "Completa Codice"
+     Gestisce visualizzazione domande/codice, input utente e navigazione
+-->
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>

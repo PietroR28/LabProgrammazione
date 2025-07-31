@@ -9,6 +9,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Controller di navigazione per gli esercizi "Completa Codice".
+ * Si occupa solo del reindirizzamento dalla schermata di presentazione
+ * all'interfaccia di esecuzione dell'esercizio.
+ */
 public class CompletaCodiceExerciseController extends MacroExerciseController {
     private String username;
 

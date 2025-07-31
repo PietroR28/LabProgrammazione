@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- 
+     Interfaccia di presentazione per esercizi "Completa Codice"
+     Mostra titolo, descrizione ed esempio dell'esercizio prima dell'inizio
+-->
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>

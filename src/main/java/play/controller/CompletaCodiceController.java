@@ -9,6 +9,11 @@ import javafx.stage.Stage;
 import play.model.Exercise;
 import play.model.ExerciseModel;
 
+/**
+ * Controller principale per gli esercizi "Completa Codice".
+ * Gestisce l'interfaccia di esecuzione: mostra domande/codice, raccoglie risposte utente,
+ * gestisce la navigazione tra esercizi e verifica le risposte alla fine.
+ */
 public class CompletaCodiceController extends BaseExerciseController {
 
     private final ExerciseModel exerciseModel = new ExerciseModel();
